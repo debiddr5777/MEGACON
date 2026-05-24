@@ -434,21 +434,31 @@
       letter-spacing: 0.5px;
     }
     
+    .image-dimension-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 15px auto 25px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .callout-length {
-      bottom: 80px;
-      left: 50%;
+      bottom: -15px;
+      left: 55%;
       transform: translateX(-50%);
     }
     
     .callout-height {
-      top: 45%;
-      right: 30px;
+      top: 50%;
+      right: -25px;
       transform: translateY(-50%);
     }
     
     .callout-width {
-      bottom: 30px;
-      left: 30px;
+      bottom: 25px;
+      left: -20px;
     }
 
     .dimension-labels-container {
@@ -827,19 +837,21 @@
       <!-- Left Column: Visual isolated block with dimensions labels -->
       <div class="visual-block-holder">
         <img src="./logo.jpeg" alt="MEGACON Brand" class="dimension-overlay-logo">
-        <img src="./aac_block_transparent.png" alt="MEGACON AAC Block Dimensions" class="transparent-block-img">
-        
-        <div class="dimension-callout callout-length">
-          <span class="badge-icon">L</span>
-          <span class="badge-val">600 mm</span>
-        </div>
-        <div class="dimension-callout callout-height">
-          <span class="badge-icon">H</span>
-          <span class="badge-val">200 mm</span>
-        </div>
-        <div class="dimension-callout callout-width">
-          <span class="badge-icon" style="background:var(--accent);color:white;">W</span>
-          <span class="badge-val">75-400 mm</span>
+        <div class="image-dimension-wrapper">
+          <img src="./aac_block_transparent.png" alt="MEGACON AAC Block Dimensions" class="transparent-block-img">
+          
+          <div class="dimension-callout callout-length">
+            <span class="badge-icon">L</span>
+            <span class="badge-val">600 mm</span>
+          </div>
+          <div class="dimension-callout callout-height">
+            <span class="badge-icon">H</span>
+            <span class="badge-val">200 mm</span>
+          </div>
+          <div class="dimension-callout callout-width">
+            <span class="badge-icon" style="background:var(--accent);color:white;">W</span>
+            <span class="badge-val">75-400 mm</span>
+          </div>
         </div>
 
         <div class="dimension-labels-container">
