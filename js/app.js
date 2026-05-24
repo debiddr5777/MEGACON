@@ -280,6 +280,14 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const quoteForm = document.getElementById('quote-form');
   const formFeedback = document.getElementById('form-feedback');
+  const phoneInput = document.getElementById('form-phone');
+
+  // Restrict phone input to only digits (0-9)
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  }
 
   quoteForm.addEventListener('submit', (e) => {
     e.preventDefault();
