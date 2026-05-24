@@ -474,88 +474,49 @@
 
     .dimension-callout {
       position: absolute;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--primary);
+      background: var(--primary);
+      color: white;
+      border-radius: 20px;
+      padding: 4px 12px 4px 4px;
       display: flex;
       align-items: center;
-      gap: 5px;
-      z-index: 3;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(4px);
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-family: 'Outfit', sans-serif;
+      z-index: 5;
+      border: 2px solid white;
+    }
+    .dimension-callout .badge-icon {
+      background: var(--secondary);
+      color: var(--primary);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 10px;
+    }
+    .dimension-callout .badge-val {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
     .callout-length {
-      bottom: 90px;
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
     }
-    .callout-length .callout-line {
-      width: 140px;
-      height: 2px;
-      background: var(--secondary);
-      position: relative;
-    }
-    .callout-length .callout-line::before,
-    .callout-length .callout-line::after {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-top: 2px solid var(--secondary);
-      border-left: 2px solid var(--secondary);
-      top: -5px;
-    }
-    .callout-length .callout-line::before { left: 0; transform: rotate(-45deg); }
-    .callout-length .callout-line::after { right: 0; transform: rotate(135deg); }
     .callout-height {
-      top: 48%;
-      right: 20px;
+      top: 45%;
+      right: 30px;
       transform: translateY(-50%);
-      flex-direction: column;
     }
-    .callout-height .callout-line {
-      width: 2px;
-      height: 100px;
-      background: var(--secondary);
-      position: relative;
-    }
-    .callout-height .callout-line::before,
-    .callout-height .callout-line::after {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-right: 2px solid var(--secondary);
-      border-bottom: 2px solid var(--secondary);
-      left: -5px;
-    }
-    .callout-height .callout-line::before { top: 0; transform: rotate(-45deg); }
-    .callout-height .callout-line::after { bottom: 0; transform: rotate(135deg); }
     .callout-width {
       bottom: 30px;
-      left: 12px;
+      left: 30px;
     }
-    .callout-width .callout-line {
-      width: 80px;
-      height: 2px;
-      background: var(--accent);
-      position: relative;
-    }
-    .callout-width .callout-line::before,
-    .callout-width .callout-line::after {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-top: 2px solid var(--accent);
-      border-left: 2px solid var(--accent);
-      top: -5px;
-    }
-    .callout-width .callout-line::before { left: 0; transform: rotate(-45deg); }
-    .callout-width .callout-line::after { right: 0; transform: rotate(135deg); }
 
     .dimension-labels-container {
       width: 100%;
@@ -900,16 +861,16 @@
         <img src="./aac_block_transparent.png" alt="MEGACON AAC Block Dimensions" class="transparent-block-img">
         
         <div class="dimension-callout callout-length">
-          <span class="callout-line"></span>
-          <span class="callout-label">600 mm</span>
+          <span class="badge-icon">L</span>
+          <span class="badge-val">600 mm</span>
         </div>
         <div class="dimension-callout callout-height">
-          <span class="callout-line"></span>
-          <span class="callout-label">200 mm</span>
+          <span class="badge-icon">H</span>
+          <span class="badge-val">200 mm</span>
         </div>
         <div class="dimension-callout callout-width">
-          <span class="callout-line"></span>
-          <span class="callout-label">75-400 mm</span>
+          <span class="badge-icon" style="background:var(--accent);color:white;">W</span>
+          <span class="badge-val">75-400 mm</span>
         </div>
 
         <div class="dimension-labels-container">
