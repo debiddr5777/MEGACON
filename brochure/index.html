@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MEGACON INFRACRETE - AAC Blocks Brochure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A; /* Deep Navy */
+      --secondary: #EAB308; /* Gold / Yellow */
+      --accent: #EF4444; /* Red */
+      --text: #334155;
+      --text-light: #64748B;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --border: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text);
+      background-color: #525659;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: var(--bg);
+      margin: 20px auto;
+      padding: 15mm;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 210mm;
+        height: 297mm;
+        padding: 12mm;
+      }
+    }
+
+    /* Header & Footer Utilities */
+    .brochure-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .brochure-header .logo-container img {
+      height: 45px;
+      object-fit: contain;
+    }
+
+    .brochure-header .web-tag {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .brochure-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid var(--border);
+      padding-top: 10px;
+      font-size: 10px;
+      color: var(--text-light);
+    }
+
+    .brochure-footer .page-num {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Page 1: Cover Page */
+    .cover-layout {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, var(--primary) 65%, #1E293B 100%);
+      padding: 20px;
+      border: 8px solid var(--secondary);
+      border-radius: 4px;
+      color: #FFFFFF;
+      position: relative;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .cover-logo img {
+      height: 90px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .stamp-container {
+      background: var(--secondary);
+      color: var(--primary);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 800;
+      font-size: 11px;
+      line-height: 1.2;
+      border: 3px dashed var(--primary);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transform: rotate(12deg);
+    }
+
+    .cover-middle {
+      margin: 40px 0;
+    }
+
+    .cover-middle h1 {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 15px;
+    }
+
+    .cover-middle h1 span {
+      color: var(--secondary);
+    }
+
+    .cover-middle p {
+      font-size: 18px;
+      color: #94A3B8;
+      font-weight: 300;
+      border-left: 4px solid var(--secondary);
+      padding-left: 15px;
+    }
+
+    .cover-image-box {
+      width: 100%;
+      height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .cover-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+    }
+
+    .cover-company-info h3 {
+      font-size: 18px;
+      color: var(--secondary);
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .cover-company-info p {
+      font-size: 11px;
+      color: #CBD5E1;
+      max-width: 450px;
+      line-height: 1.4;
+    }
+
+    .cover-reg-details {
+      text-align: right;
+      font-size: 10px;
+      color: #94A3B8;
+      line-height: 1.5;
+    }
+
+    /* Page 2: Advantage, Ingredients & Mascot Dialogue */
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      border-left: 5px solid var(--secondary);
+      padding-left: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title span {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .intro-text-block {
+      background: var(--bg-alt);
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .intro-text-block p {
+      font-size: 11.5px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .ingredients-box h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .ingredients-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      background: var(--primary);
+      color: white;
+      font-size: 9.5px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Mascot Cloud Dialogue Container */
+    .mascot-cloud-container {
+      background: radial-gradient(circle, #FFFBEB 0%, #FEF3C7 100%);
+      border-radius: 40px; /* Soft cloud shape base */
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(251, 191, 36, 0.15);
+    }
+
+    .mascot-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .mascot-img-box {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 50%;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border: 2px solid var(--secondary);
+    }
+
+    .mascot-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .cloud-dialogues {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Cloud-shaped dialogue bubbles */
+    .cloud-bubble {
+      padding: 10px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      line-height: 1.4;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      position: relative;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .cloud-bubble::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-right: 1px solid rgba(234, 179, 8, 0.3);
+      border-bottom: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .cloud-bubble.aac {
+      border-left: 4px solid var(--secondary);
+    }
+
+    .cloud-bubble.aac::after {
+      left: -6px;
+      top: 50%;
+      transform: translateY(-50%) rotate(135deg);
+    }
+
+    .cloud-bubble.brick {
+      border-left: 4px solid var(--accent);
+    }
+
+    .cloud-bubble.brick::after {
+      left: -6px;
+      top: 50%;
+      transform: translateY(-50%) rotate(135deg);
+    }
+
+    .cloud-bubble strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 10.5px;
+      text-transform: uppercase;
+    }
+
+    .cloud-bubble.aac strong { color: var(--primary); }
+    .cloud-bubble.brick strong { color: var(--accent); }
+
+    /* Features 10 grid */
+    .features-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .feature-badge {
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      border-radius: 6px;
+      padding: 10px 5px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-badge svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .feature-badge span {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    /* Page 3: Dimension Guide Page */
+    .dimension-page-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: center;
+      height: 100%;
+    }
+
+    .visual-block-holder {
+      background: radial-gradient(circle, #F8FAFC 0%, #F1F5F9 100%);
+      border: 2px solid var(--border);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 240mm;
+      position: relative;
+    }
+
+    .transparent-block-img {
+      width: 100%;
+      max-width: 320px;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 30px rgba(15, 23, 42, 0.1));
+    }
+
+    .dimension-overlay-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 40px;
+      background: white;
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .dimension-labels-container {
+      width: 100%;
+      margin-top: 25px;
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      border: 1px solid var(--border);
+    }
+
+    .dimension-labels-container h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 5px;
+    }
+
+    .dimension-labels-container ul {
+      list-style: none;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .dimension-labels-container li strong {
+      color: var(--primary);
+    }
+
+    .dimension-table-holder {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .dimension-title-txt {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      border-bottom: 3px solid var(--secondary);
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .table-container {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .table-header {
+      background: var(--primary);
+      color: white;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5px;
+    }
+
+    .spec-table th, .spec-table td {
+      padding: 7px 9px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .spec-table th {
+      background: var(--bg-alt);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .highlight-row {
+      background-color: #FEF08A !important;
+      font-weight: 700;
+    }
+
+    .precision-block-desc {
+      background-color: var(--bg-alt);
+      border: 1px dashed var(--border);
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      line-height: 1.5;
+    }
+
+    /* Page 4: Technical Specifications, Savings & Contact Block */
+    .page4-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 15px;
+      align-items: start;
+    }
+
+    .savings-card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .savings-card {
+      border: 2px solid var(--secondary);
+      border-radius: 6px;
+      padding: 8px;
+      text-align: center;
+      background: #FFFBEB;
+    }
+
+    .savings-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .savings-lbl {
+      font-size: 8px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.2;
+    }
+
+    .factory-promo-box {
+      width: 100%;
+      height: 130px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 15px;
+    }
+
+    .factory-promo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .contact-block {
+      background: var(--primary);
+      color: white;
+      border-radius: 6px;
+      padding: 15px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: auto;
+    }
+
+    .contact-col h4 {
+      font-size: 11px;
+      color: var(--secondary);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .contact-col p {
+      font-size: 9.5px;
+      line-height: 1.4;
+      color: #E2E8F0;
+      margin-bottom: 4px;
+    }
+
+    .contact-col a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .contact-col.right-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: right;
+    }
+
+    .contact-grid-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER PAGE -->
+  <div class="page" id="page-1">
+    <div class="cover-layout">
+      <div class="cover-top">
+        <div class="cover-logo">
+          <img src="./logo.jpeg" alt="MEGACON Logo">
+        </div>
+        <div class="stamp-container">
+          100% PURE<br>FLY ASH<br>AAC BLOCKS
+        </div>
+      </div>
+
+      <div class="cover-middle">
+        <h1>MAXIMUM STRENGTH, <br>MINIMUM WEIGHT<br><span>THE FUTURE OF MASONRY</span></h1>
+        <p>A smart, green building material engineered for modern infrastructure, offering unmatched thermal insulation, structural strength, and cost savings.</p>
+      </div>
+
+      <div class="cover-image-box">
+        <img src="./block_stack.png" alt="MEGACON High Precision AAC Blocks Stack">
+      </div>
+
+      <div class="cover-bottom">
+        <div class="cover-company-info">
+          <h3>MEGACON INFRACRETE PVT. LTD.</h3>
+          <p>Leading the green revolution in construction materials. Our Autoclaved Aerated Concrete (AAC) blocks provide premium quality, precision, and durability for projects of all scales.</p>
+        </div>
+        <div class="cover-reg-details">
+          <strong>GST No:</strong> 21AASCM0769R1ZP<br>
+          <strong>PAN:</strong> AASCM0769R<br>
+          <strong>ISO Certified Plant</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: INTRO, FEATURES & MASCOT DIALOGUE -->
+  <div class="page" id="page-2">
+    <div class="brochure-header">
+      <div class="logo-container">
+        <img src="./logo.jpeg" alt="MEGACON Logo">
+      </div>
+      <div class="web-tag">WWW.MEGACONINFRA.COM</div>
+    </div>
+
+    <div class="section-title">
+      Every Big Idea Starts With An All-Important First Step
+      <span>MEGACON ADVANTAGE</span>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-text-block">
+        <p>Autoclaved Aerated Concrete (AAC) is a lightweight, load-bearing, high-insulating, durable building product, produced in a wide range of sizes and strengths.</p>
+        <p>MEGACON AAC Blocks are manufactured using 100% pure fly ash, OPC cement, quick lime, gypsum, and aluminium powder. Cured under high-pressure steam in autoclaves, they offer double the insulation and up to 3x lighter weight compared to traditional clay bricks.</p>
+        
+        <div class="ingredients-box">
+          <h4>Key Ingredients</h4>
+          <div class="ingredients-pills">
+            <span class="pill">Fly Ash (60-65%)</span>
+            <span class="pill">OPC Cement</span>
+            <span class="pill">Quick Lime</span>
+            <span class="pill">Gypsum</span>
+            <span class="pill">Aluminium</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mascot Conversation Cloud Container -->
+      <div class="mascot-cloud-container">
+        <div class="mascot-row">
+          <div class="mascot-img-box">
+            <img src="./mascots.png" alt="MEGACON Mascots Comparison">
+          </div>
+          <div class="cloud-dialogues">
+            <div class="cloud-bubble aac">
+              <strong>Mega-Block</strong>
+              "I'm lightweight, stand 4-6 hrs in fire, block heat, and carry tons with ease! Laying me is 3x faster!"
+            </div>
+            <div class="cloud-bubble brick">
+              <strong>Rusty the Brick</strong>
+              "I absorb water like a sponge, crack easily, and waste so much mortar. I can't compete!"
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      10 Smart Benefits of MEGACON AAC Blocks
+    </div>
+
+    <!-- 10 Feature Badges -->
+    <div class="features-badge-grid">
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span>Leak Proof</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+        <span>High Strength / Low Density</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2C6.5 2.2 2 6.7 2 12.2s4.5 10 10 10 10-4.5 10-10S17.5 2.2 12 2.2zm1 17.8h-2v-2h2v2zm2-5.5c-.8 0-1.5.7-1.5 1.5h-3c0-1.9 1.6-3.5 3.5-3.5 1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2h-3c0-2.8 2.2-5 5-5s5 2.2 5 5c0 2.2-1.8 4-4 4z"/></svg>
+        <span>Energy Efficient</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>
+        <span>Termite Resistant</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+        <span>Cost Saving</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM13 16h-2v2h2v-2zm0-6h-2v4h2v-4z"/></svg>
+        <span>Fire Resistant</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+        <span>Thermal Insulation</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <span>Earthquake Resistant</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        <span>High Dimensional Accuracy</span>
+      </div>
+      <div class="feature-badge">
+        <svg viewBox="0 0 24 24"><path d="M3 13h12v-2H3v2zm0 4h12v-2H3v2zm0-8h12V7H3v2zm14 2h4v-2h-4v2zm0 6h4v-2h-4v2zm0-12v2h4V5h-4z"/></svg>
+        <span>Ease of Working</span>
+      </div>
+    </div>
+
+    <div class="brochure-footer">
+      <div>MEGACON INFRACRETE PVT. LTD.</div>
+      <div class="page-num">02</div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: DEDICATED DIMENSION BLOCK PAGE -->
+  <div class="page" id="page-3">
+    <div class="brochure-header">
+      <div class="logo-container">
+        <img src="./logo.jpeg" alt="MEGACON Logo">
+      </div>
+      <div class="web-tag">WWW.MEGACONINFRA.COM</div>
+    </div>
+
+    <div class="dimension-page-layout">
+      <!-- Left Column: Visual isolated block with dimensions labels -->
+      <div class="visual-block-holder">
+        <img src="./logo.jpeg" alt="MEGACON Brand" class="dimension-overlay-logo">
+        <img src="./isolated_block.png" alt="MEGACON AAC Block Isolated" class="transparent-block-img">
+        
+        <div class="dimension-labels-container">
+          <h4>Standard Dimension Guide</h4>
+          <ul>
+            <li><strong>Length (L):</strong> 600 mm (Standard cut)</li>
+            <li><strong>Height (H):</strong> 200 mm (Standard height)</li>
+            <li><strong>Thicknesses (W):</strong> 75mm, 100mm, 150mm, 200mm, 300mm, 400mm</li>
+            <li><strong>Dimensional Tolerance:</strong> Length & Height &plusmn; 3mm | Width &plusmn; 2mm</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column: Dimensions Table & Explanatory details -->
+      <div class="dimension-table-holder">
+        <div class="dimension-title-txt">MEGACON Size Matrix</div>
+        <p class="precision-block-desc">
+          High-precision wire-cutting technology ensures flat surface textures, requiring only a 3mm thin-bed joint adhesive instead of 12mm thick cement sand jointing, reducing overall mortar wastage.
+        </p>
+
+        <div class="table-container">
+          <div class="table-header">Standard Block Size Specifications</div>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Thickness (mm)</th>
+                <th>Standard Size (L x H)</th>
+                <th>Volume (CBM)</th>
+                <th>Blocks / CBM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>75 mm</strong> (3")</td>
+                <td>600 mm x 200 mm</td>
+                <td>0.0090</td>
+                <td>111.11</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>100 mm</strong> (4")</td>
+                <td>600 mm x 200 mm</td>
+                <td>0.0120</td>
+                <td>83.33</td>
+              </tr>
+              <tr>
+                <td><strong>150 mm</strong> (6")</td>
+                <td>600 mm x 200 mm</td>
+                <td>0.0180</td>
+                <td>55.56</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>200 mm</strong> (8")</td>
+                <td>600 mm x 200 mm</td>
+                <td>0.0240</td>
+                <td>41.67</td>
+              </tr>
+              <tr>
+                <td><strong>300 mm</strong> (12")</td>
+                <td>600 mm x 200 mm</td>
+                <td>0.0360</td>
+                <td>27.78</td>
+              </tr>
+              <tr>
+                <td><strong>400 mm</strong> (16")</td>
+                <td>600 mm x 200 mm</td>
+                <td>0.0480</td>
+                <td>20.83</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="precision-block-desc">
+          <strong>How to read block volume:</strong><br>
+          AAC Blocks are calculated and delivered in Cubic Meters (CBM). An 8-inch block (200mm width) requires 41.67 blocks to cover 1 Cubic Meter of structural walling.
+        </div>
+      </div>
+    </div>
+
+    <div class="brochure-footer">
+      <div>MEGACON INFRACRETE PVT. LTD.</div>
+      <div class="page-num">03</div>
+    </div>
+  </div>
+
+  <!-- PAGE 4: TECHNICAL SPECIFICATIONS, SAVINGS & CONTACTS -->
+  <div class="page" id="page-4">
+    <div class="brochure-header">
+      <div class="logo-container">
+        <img src="./logo.jpeg" alt="MEGACON Logo">
+      </div>
+      <div class="web-tag">WWW.MEGACONINFRA.COM</div>
+    </div>
+
+    <div class="section-title">
+      Technical Specifications & Compliance Standards
+      <span>COMPLIANCE & TESTING</span>
+    </div>
+
+    <div class="page4-grid">
+      <!-- Specs Table -->
+      <div class="table-container">
+        <div class="table-header">Technical Specifications (IS: 2185 Part-3)</div>
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Property / Characteristic</th>
+              <th>MEGACON Specification</th>
+              <th>IS 2185 Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dry Density</strong></td>
+              <td>560 - 640 kg/m³</td>
+              <td>551 - 650 kg/m³</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Compressive Strength</strong></td>
+              <td>&gt; 4.0 N/mm²</td>
+              <td>Min 3.0 N/mm² (Grade B)</td>
+            </tr>
+            <tr>
+              <td><strong>Thermal Conductivity</strong></td>
+              <td>0.16 - 0.21 W/mK</td>
+              <td>Max 0.24 W/mK</td>
+            </tr>
+            <tr>
+              <td><strong>Drying Shrinkage</strong></td>
+              <td>0.04%</td>
+              <td>Max 0.05%</td>
+            </tr>
+            <tr>
+              <td><strong>Fire Resistance</strong></td>
+              <td>4 - 6 Hours</td>
+              <td>Min 2 Hours</td>
+            </tr>
+            <tr>
+              <td><strong>Water Absorption</strong></td>
+              <td>&lt;= 10% (by weight)</td>
+              <td>&lt;= 20%</td>
+            </tr>
+            <tr>
+              <td><strong>Sound Insulation</strong></td>
+              <td>38 - 44 dB</td>
+              <td>Excellent Acoustic block</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Savings & Factory Combo -->
+      <div>
+        <div class="table-header" style="margin-bottom: 10px;">Project Cost Impact & Savings</div>
+        <div class="savings-card-grid">
+          <div class="savings-card">
+            <div class="savings-val">10%</div>
+            <div class="savings-lbl">Steel & Concrete</div>
+          </div>
+          <div class="savings-card">
+            <div class="savings-val">35%</div>
+            <div class="savings-lbl">Plaster Material</div>
+          </div>
+          <div class="savings-card">
+            <div class="savings-val">60%</div>
+            <div class="savings-lbl">Joint Mortar</div>
+          </div>
+          <div class="savings-card">
+            <div class="savings-val">10%</div>
+            <div class="savings-lbl">Wastage</div>
+          </div>
+        </div>
+
+        <div class="factory-promo-box">
+          <img src="./factory.png" alt="MEGACON High-Pressure Steam Autoclaves">
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Block Footer -->
+    <div class="contact-block">
+      <div class="contact-col">
+        <h4>Registered Office</h4>
+        <p><strong>MEGACON INFRACRETE PVT. LTD.</strong></p>
+        <p>Plot No. 3293, Goda Lokanath Road,<br>Dadhimachagadia, Kaipadar<br>Khordha, Odisha - 752056</p>
+        <p style="margin-top: 5px;"><strong>GSTIN:</strong> 21AASCM0769R1ZP | <strong>PAN:</strong> AASCM0769R</p>
+      </div>
+      <div class="contact-col right-col">
+        <div>
+          <h4>Sales & Inquiries</h4>
+          <div class="contact-grid-info">
+            <div>
+              <p><strong>Mobile:</strong></p>
+              <p>+91 78305 03010</p>
+              <p>+91 78307 05080</p>
+            </div>
+            <div>
+              <p><strong>Online:</strong></p>
+              <p>info@megaconinfra.com</p>
+              <p>www.megaconinfra.com</p>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 8.5px; opacity: 0.8; margin-top: 10px;">Manufactured in compliance with Bureau of Indian Standards (BIS) and green building certification requirements.</p>
+      </div>
+    </div>
+
+    <div class="brochure-footer">
+      <div>MEGACON INFRACRETE PVT. LTD.</div>
+      <div class="page-num">04</div>
+    </div>
+  </div>
+
+</body>
+</html>

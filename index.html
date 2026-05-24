@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MEGACON INFRACRETE Pvt. Ltd. - Autoclaved Aerated Concrete (AAC) Blocks Manufacturer in Khordha, Odisha. High Compressive Strength & Thermal Insulation.">
+  <title>MEGACON INFRACRETE | Premium AAC Blocks Manufacturer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header class="main-header">
+    <div class="container header-container">
+      <a href="#" class="logo-link">
+        <img src="./assets/logo.jpeg" alt="MEGACON INFRACRETE Logo" class="nav-logo" id="logo-img">
+      </a>
+      <nav class="navbar" id="navbar">
+        <a href="#hero" class="nav-item active">Home</a>
+        <a href="#about" class="nav-item">About Us</a>
+        <a href="#products" class="nav-item">Dimensions</a>
+        <a href="#tech-specs" class="nav-item">Specifications</a>
+        <a href="#calculator" class="nav-item calc-nav-btn">Cost Calculator</a>
+        <a href="#contact" class="nav-item">Contact Us</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <span class="hero-badge">100% Pure Fly Ash AAC Blocks</span>
+        <h1 class="hero-title">Maximum Strength, <br><span class="highlight-text">Minimum Weight</span></h1>
+        <p class="hero-description">MEGACON INFRACRETE Autoclaved Aerated Concrete (AAC) blocks deliver superior compressive strength, double the thermal insulation, and save up to 35% on structural weight compared to red clay bricks.</p>
+        <div class="hero-actions">
+          <a href="#calculator" class="btn btn-primary">Try Budget Calculator</a>
+          <a href="#products" class="btn btn-outline">Explore Dimensions</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <img src="./assets/block_stack.png" alt="MEGACON High-Precision AAC Blocks Stack" class="hero-img">
+          <div class="hero-card-badge">ISO Certified Plant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mascot Comparison Section -->
+  <section class="mascot-section" id="about">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">MEGACON Advantage</span>
+        <h2 class="section-title">The Mascot Face-Off: AAC Block vs. Red Clay Brick</h2>
+        <p class="section-description">See why leading structural engineers choose Autoclaved Aerated Concrete over traditional bricks in this interactive comparison.</p>
+      </div>
+
+      <!-- Mascot Interactive Grid with Cloud Bubble designs -->
+      <div class="mascot-interactive-grid cloud-shape-grid">
+        <div class="mascot-card no-block">
+          <div class="mascot-img-wrap transparent-bg">
+            <img src="./assets/mascots.png" alt="MEGACON Mascots Comparison" class="mascot-main-img">
+          </div>
+        </div>
+        
+        <div class="dialogue-container cloud-dialogues">
+          <div class="dialogue-bubble left-bubble cloud-bubble aac" id="bubble-aac">
+            <div class="bubble-header">
+              <span class="bubble-name text-yellow">Mega-Block (AAC Block)</span>
+              <span class="bubble-tag">Champion</span>
+            </div>
+            <p class="bubble-text">"Hey Rusty! Still struggling to carry that load? I weigh 1/3rd of your weight, carry more compressive strength, and block heat perfectly. Plus, laying one of me is equivalent to laying 9 of you! Why stick to old clay?"</p>
+          </div>
+
+          <div class="dialogue-bubble right-bubble cloud-bubble brick" id="bubble-brick">
+            <div class="bubble-header">
+              <span class="bubble-name text-red">Rusty (Clay Brick)</span>
+              <span class="bubble-tag-bad">Outdated</span>
+            </div>
+            <p class="bubble-text">"Ugh... tell me about it, Mega-Block. I'm soaking up water like crazy (over 20% absorption!), cracking under high stress, and costing builders a fortune in cement mortar and plaster. I'm just too exhausted..."</p>
+          </div>
+
+          <div class="dialogue-controls">
+            <button class="btn btn-sm btn-yellow active" id="btn-show-aac">Mega-Block Info</button>
+            <button class="btn btn-sm btn-outline" id="btn-show-brick">Rusty's Drawbacks</button>
+            <button class="btn btn-sm btn-outline" id="btn-show-both">Show Both</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Rings -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>4-6 Hrs Fire Rating</h3>
+          <p>Blocks heat transfer and stays structurally stable for up to 6 hours under intense fire.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">❄️</div>
+          <h3>Thermal Insulation</h3>
+          <p>Reduces air conditioning costs by keeping indoor rooms cool in summer and warm in winter.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🪙</div>
+          <h3>Substantial Savings</h3>
+          <p>Saves 10% on steel/concrete and 60% on joint mortar with thin-bed adhesive joints.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📏</div>
+          <h3>&plusmn; 1.0mm Accuracy</h3>
+          <p>Perfect dimensions ensure flat walls, eliminating the need for thick backing plaster.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dimensions Section -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Size Matrix</span>
+        <h2 class="section-title">Standard & Custom Dimensions</h2>
+        <p class="section-description">Our state-of-the-art wire-cutting systems produce highly accurate block sizes matching MEGACON quality parameters.</p>
+      </div>
+
+      <div class="dimensions-interactive-grid">
+        <div class="dimensions-visual-card transparent-bg">
+          <img src="./assets/isolated_block.png" alt="AAC Block Dimensions" class="block-visual transparent-block">
+          <div class="block-details-overlay">
+            <h4>MEGACON Block Spec</h4>
+            <ul>
+              <li><strong>Length:</strong> 600 mm (24")</li>
+              <li><strong>Height:</strong> 200 mm (8")</li>
+              <li><strong>Widths:</strong> 75mm to 400mm</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="dimensions-table-card">
+          <div class="table-actions">
+            <span class="table-info-txt">Select Thickness to Highlight:</span>
+            <div class="btn-group-toggle" id="dimension-select-btns">
+              <button class="btn btn-xs active" data-width="all">All Sizes</button>
+              <button class="btn btn-xs" data-width="75">75mm</button>
+              <button class="btn btn-xs" data-width="100">100mm</button>
+              <button class="btn btn-xs" data-width="150">150mm</button>
+              <button class="btn btn-xs" data-width="200">200mm</button>
+              <button class="btn btn-xs" data-width="300">300mm</button>
+              <button class="btn btn-xs" data-width="400">400mm</button>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table" id="dimensions-table">
+              <thead>
+                <tr>
+                  <th>Block Type</th>
+                  <th>Length (mm)</th>
+                  <th>Height (mm)</th>
+                  <th>Thickness (mm)</th>
+                  <th>Volume (CBM)</th>
+                  <th>Qty / CBM</th>
+                  <th>Face Area</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-width="75">
+                  <td>Partition Block (3")</td>
+                  <td>600</td>
+                  <td>200</td>
+                  <td>75</td>
+                  <td>0.0090</td>
+                  <td>111.11</td>
+                  <td>1.29 Sq.Ft</td>
+                </tr>
+                <tr data-width="100">
+                  <td>Interior Wall Block (4")</td>
+                  <td>600</td>
+                  <td>200</td>
+                  <td>100</td>
+                  <td>0.0120</td>
+                  <td>83.33</td>
+                  <td>1.29 Sq.Ft</td>
+                </tr>
+                <tr data-width="150">
+                  <td>Load-Bearing Block (6")</td>
+                  <td>600</td>
+                  <td>200</td>
+                  <td>150</td>
+                  <td>0.0180</td>
+                  <td>55.56</td>
+                  <td>1.29 Sq.Ft</td>
+                </tr>
+                <tr data-width="200">
+                  <td>External Wall Block (8")</td>
+                  <td>600</td>
+                  <td>200</td>
+                  <td>200</td>
+                  <td>0.0240</td>
+                  <td>41.67</td>
+                  <td>1.29 Sq.Ft</td>
+                </tr>
+                <tr data-width="300">
+                  <td>Heavy Insulation Block (12")</td>
+                  <td>600</td>
+                  <td>200</td>
+                  <td>300</td>
+                  <td>0.0360</td>
+                  <td>27.78</td>
+                  <td>1.29 Sq.Ft</td>
+                </tr>
+                <tr data-width="400">
+                  <td>Special Industrial Block (16")</td>
+                  <td>600</td>
+                  <td>200</td>
+                  <td>400</td>
+                  <td>0.0480</td>
+                  <td>20.83</td>
+                  <td>1.29 Sq.Ft</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footnote">
+            * Standard tolerances: Length & Height &plusmn; 3mm, Width &plusmn; 2mm. Custom thicknesses are available on demand.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specs Tab Panel -->
+  <section class="tech-section" id="tech-specs">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Parameters</span>
+        <h2 class="section-title">Technical Comparisons & IS Standards</h2>
+        <p class="section-description">We manufacture strictly in compliance with Bureau of Indian Standards (BIS) parameters.</p>
+      </div>
+
+      <div class="tech-tab-container">
+        <div class="tabs-nav">
+          <button class="tab-btn active" data-target="tab-properties">AAC Specifications</button>
+          <button class="tab-btn" data-target="tab-comparisons">AAC vs. Red Clay Bricks</button>
+        </div>
+
+        <div class="tab-content active" id="tab-properties">
+          <div class="tab-grid">
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Specification Name</th>
+                    <th>MEGACON Quality Value</th>
+                    <th>IS 2185 (Part 3) Code</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Dry Density</strong></td>
+                    <td>560 - 640 Kg/m³</td>
+                    <td>551 - 650 Kg/m³</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Compressive Strength</strong></td>
+                    <td>&gt; 4.0 N/mm²</td>
+                    <td>Min 3.0 N/mm²</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Thermal Conductivity</strong></td>
+                    <td>0.16 - 0.21 W/mK</td>
+                    <td>Max 0.24 W/mK</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Drying Shrinkage</strong></td>
+                    <td>0.04%</td>
+                    <td>Max 0.05%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Water Absorption</strong></td>
+                    <td>&lt;= 10% (by weight)</td>
+                    <td>Max 20%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="spec-notes-box">
+              <h3>IS-2185 (Part 3) Compliance</h3>
+              <p>Our manufacturing line cures the block slurry under high-pressure autoclave chambers (at 12 bar pressure and 190°C), triggering the formation of Tobermorite (calcium silicate hydrate mineral).</p>
+              <p>This mineral crystalline structure gives our blocks high compressive strength while maintaining an incredibly low structural density, ideal for high-rise buildings and seismic zones.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-comparisons">
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parameters</th>
+                  <th>MEGACON AAC Blocks</th>
+                  <th>Conventional Red Clay Bricks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Size Precision</strong></td>
+                  <td class="better-cell">Excellent (&plusmn;1.0mm variation)</td>
+                  <td class="worse-cell">Poor (&plusmn;3.15mm variation)</td>
+                </tr>
+                <tr>
+                  <td><strong>Compressive Strength</strong></td>
+                  <td class="better-cell">3.5 - 4.5 N/mm² (High)</td>
+                  <td class="worse-cell">2.5 - 3.0 N/mm² (Moderate)</td>
+                </tr>
+                <tr>
+                  <td><strong>Thermal Insulation</strong></td>
+                  <td class="better-cell">0.16 - 0.21 W/mK (Very Low - Insulating)</td>
+                  <td class="worse-cell">0.81 W/mK (High - Conductive)</td>
+                </tr>
+                <tr>
+                  <td><strong>Self Weight (Density)</strong></td>
+                  <td class="better-cell">560 - 640 kg/m³ (Lightweight)</td>
+                  <td class="worse-cell">1950 - 2000 kg/m³ (Heavyweight)</td>
+                </tr>
+                <tr>
+                  <td><strong>Fire Resistance</strong></td>
+                  <td class="better-cell">4 to 6 Hours (Based on width)</td>
+                  <td class="worse-cell">Up to 2 Hours only</td>
+                </tr>
+                <tr>
+                  <td><strong>Water Absorption</strong></td>
+                  <td class="better-cell">&lt; 10% of dry weight</td>
+                  <td class="worse-cell">15% - 20% of dry weight</td>
+                </tr>
+                <tr>
+                  <td><strong>Acoustic Insulation</strong></td>
+                  <td class="better-cell">Blocks 38 to 44 dB</td>
+                  <td class="worse-cell">Blocks 30 to 34 dB</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Budget Calculator Section -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-subtitle">Real-Time Estimator</span>
+        <h2 class="section-title">Interactive Project Cost & Material Calculator</h2>
+        <p class="section-description">Input your layout dimensions and specifications to get an instant quantity and cost estimate for your masonry walling and reinforcement steel.</p>
+      </div>
+
+      <div class="calculator-container">
+        <!-- Input Form Panel -->
+        <div class="calc-inputs-panel">
+          <h3 class="calc-panel-title">1. Project Specifications</h3>
+          
+          <div class="input-group">
+            <label for="calc-area">Super Built-up Area / Wall Area (Sq.Ft)</label>
+            <div class="input-with-badge">
+              <input type="number" id="calc-area" value="1200" min="100" max="100000" step="50">
+              <span class="field-badge">Sq.Ft</span>
+            </div>
+            <input type="range" id="calc-area-range" min="100" max="20000" step="100" value="1200" class="slider-range">
+          </div>
+
+          <div class="input-grid">
+            <div class="input-group">
+              <label for="calc-bhk">Layout / Configuration</label>
+              <select id="calc-bhk">
+                <option value="1">1 BHK Apartment</option>
+                <option value="2" selected>2 BHK Apartment</option>
+                <option value="3">3 BHK Apartment / House</option>
+                <option value="4">4 BHK Independent House</option>
+                <option value="custom">Custom Layout (Enter manually)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="calc-standard">Construction Standard</label>
+              <select id="calc-standard">
+                <option value="economy">Economy Grade (Standard specs)</option>
+                <option value="standard" selected>Standard Premium (Recommended)</option>
+                <option value="luxury">Luxury / Commercial (Reinforced)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input-grid" id="custom-rooms-box" style="display: none;">
+            <div class="input-group">
+              <label for="calc-bedrooms">Bedrooms Count</label>
+              <input type="number" id="calc-bedrooms" value="2" min="1" max="20">
+            </div>
+            <div class="input-group">
+              <label for="calc-kitchens">Kitchens Count</label>
+              <input type="number" id="calc-kitchens" value="1" min="1" max="10">
+            </div>
+          </div>
+
+          <div class="input-grid">
+            <div class="input-group">
+              <label for="calc-block-width">AAC Block Thickness</label>
+              <select id="calc-block-width">
+                <option value="100">100 mm (4" - Partition Walls)</option>
+                <option value="150">150 mm (6" - Main Inner Walls)</option>
+                <option value="200" selected>200 mm (8" - Outer Facade Walls)</option>
+                <option value="300">300 mm (12" - Max Insulation)</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="calc-rod">Reinforcement Rod Standard</label>
+              <select id="calc-rod">
+                <option value="500">Fe 500 TMT (Standard)</option>
+                <option value="550" selected>Fe 550D TMT (Super Ductile)</option>
+                <option value="600">Fe 600 TMT (Heavy Structural)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Output Result Panel -->
+        <div class="calc-results-panel">
+          <h3 class="calc-panel-title text-yellow">2. Estimated Materials & Costs</h3>
+
+          <div class="results-main-summary">
+            <div class="summary-lbl">Estimated Total Cost</div>
+            <div class="summary-val" id="total-price-lbl">&#8377; 1,84,600</div>
+            <p class="summary-note">* Includes Block costs, steel reinforcement, joint adhesive, and labor estimation.</p>
+          </div>
+
+          <div class="results-list">
+            <div class="result-item">
+              <div class="result-lbl-group">
+                <span class="result-icon">🧱</span>
+                <div>
+                  <span class="result-title">AAC Blocks Quantity</span>
+                  <span class="result-detail-txt" id="block-cbm-lbl">14.4 CBM (600 Blocks)</span>
+                </div>
+              </div>
+              <span class="result-val" id="block-price-lbl">&#8377; 57,600</span>
+            </div>
+
+            <div class="result-item">
+              <div class="result-lbl-group">
+                <span class="result-icon">⚡</span>
+                <div>
+                  <span class="result-title">TMT Reinforcement Steel</span>
+                  <span class="result-detail-txt" id="steel-kg-lbl">1,820 Kgs (Fe 550D)</span>
+                </div>
+              </div>
+              <span class="result-val" id="steel-price-lbl">&#8377; 1,00,100</span>
+            </div>
+
+            <div class="result-item">
+              <div class="result-lbl-group">
+                <span class="result-icon">🧪</span>
+                <div>
+                  <span class="result-title">Thin-Bed Joint Adhesive</span>
+                  <span class="result-detail-txt" id="adhesive-bags-lbl">36 Bags (40kg each)</span>
+                </div>
+              </div>
+              <span class="result-val" id="adhesive-price-lbl">&#8377; 16,200</span>
+            </div>
+
+            <div class="result-item">
+              <div class="result-lbl-group">
+                <span class="result-icon">👷</span>
+                <div>
+                  <span class="result-title">Estimated Masonry Labor</span>
+                  <span class="result-detail-txt" id="labor-rate-lbl">&#8377; 25/Sq.Ft rate</span>
+                </div>
+              </div>
+              <span class="result-val" id="labor-price-lbl">&#8377; 30,000</span>
+            </div>
+          </div>
+
+          <!-- Cost Bar Chart -->
+          <div class="cost-breakdown-chart">
+            <div class="chart-header">
+              <span>Cost Share Percentage</span>
+            </div>
+            <div class="stacked-bar">
+              <div class="bar-slice bg-yellow" id="bar-slice-blocks" style="width: 30%;" title="Blocks"></div>
+              <div class="bar-slice bg-red" id="bar-slice-steel" style="width: 50%;" title="Steel"></div>
+              <div class="bar-slice bg-blue" id="bar-slice-adhesive" style="width: 10%;" title="Adhesive"></div>
+              <div class="bar-slice bg-grey" id="bar-slice-labor" style="width: 10%;" title="Labor"></div>
+            </div>
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-dot bg-yellow"></span>Blocks</span>
+              <span class="legend-item"><span class="legend-dot bg-red"></span>Steel</span>
+              <span class="legend-item"><span class="legend-dot bg-blue"></span>Adhesive</span>
+              <span class="legend-item"><span class="legend-dot bg-grey"></span>Labor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info-panel">
+        <span class="section-subtitle">Get in Touch</span>
+        <h2 class="section-title text-white">Let's Discuss Your Project</h2>
+        <p class="contact-p-desc">We deliver our high-precision AAC blocks across Khordha, Bhubaneswar, Cuttack, and neighboring regions in Odisha. Contact our support for free samples and load inspections.</p>
+
+        <div class="contact-details-wrap">
+          <div class="contact-detail-item">
+            <span class="detail-icon">📍</span>
+            <div>
+              <h4>Manufacturing Plant & Office</h4>
+              <p>Plot No. 3293, Goda Lokanath Road, Dadhimachagadia, Kaipadar, Khordha, Odisha - 752056</p>
+            </div>
+          </div>
+          <div class="contact-detail-item">
+            <span class="detail-icon">📞</span>
+            <div>
+              <h4>Sales Support Desk</h4>
+              <p><a href="tel:+917830503010">+91 78305 03010</a></p>
+              <p><a href="tel:+917830705080">+91 78307 05080</a></p>
+            </div>
+          </div>
+          <div class="contact-detail-item">
+            <span class="detail-icon">✉️</span>
+            <div>
+              <h4>Email Communications</h4>
+              <p><a href="mailto:info@megaconinfra.com">info@megaconinfra.com</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="company-tax-badges">
+          <span><strong>GSTIN:</strong> 21AASCM0769R1ZP</span>
+          <span><strong>PAN:</strong> AASCM0769R</span>
+        </div>
+      </div>
+
+      <div class="contact-form-panel">
+        <h3>Request a Quote / Free Sample</h3>
+        <form class="quote-form" id="quote-form">
+          <div class="input-group">
+            <label for="form-name">Contact Person Name</label>
+            <input type="text" id="form-name" placeholder="Enter your full name" required>
+          </div>
+          <div class="input-grid">
+            <div class="input-group">
+              <label for="form-phone">Phone Number</label>
+              <input type="tel" id="form-phone" placeholder="10-digit mobile" required>
+            </div>
+            <div class="input-group">
+              <label for="form-site">Delivery Location</label>
+              <input type="text" id="form-site" placeholder="e.g. Bhubaneswar" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="form-requirement">Brief Project Details</label>
+            <textarea id="form-requirement" rows="4" placeholder="Mention total block volume required (CBM) or residential square footage..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit Quotation Request</button>
+        </form>
+        <div class="form-feedback-message" id="form-feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-bottom">
+    <div class="container footer-bottom-flex">
+      <p>&copy; 2026 MEGACON INFRACRETE Pvt. Ltd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#hero">Back to Top</a>
+        <a href="./brochure/index.html" target="_blank" class="brochure-download-link">📄 Open Printable Brochure</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
