@@ -168,6 +168,32 @@
       padding-left: 15px;
     }
 
+    .cover-float-block {
+      position: absolute;
+      right: -10px;
+      top: 35%;
+      width: 140px;
+      opacity: 0.12;
+      transform: rotate(18deg);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .cover-float-block-small {
+      position: absolute;
+      left: -25px;
+      bottom: 90px;
+      width: 90px;
+      opacity: 0.08;
+      transform: rotate(-25deg);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .float-block-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
     .cover-image-box {
       width: 100%;
       height: 250px;
@@ -176,6 +202,7 @@
       border: 3px solid rgba(255,255,255,0.1);
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       position: relative;
+      z-index: 2;
     }
 
     .cover-image-box img {
@@ -281,15 +308,16 @@
 
     /* Mascot Cloud Dialogue Container */
     .mascot-cloud-container {
-      background: radial-gradient(circle, #FFFBEB 0%, #FEF3C7 100%);
-      border-radius: 40px; /* Soft cloud shape base */
-      padding: 15px;
+      background: radial-gradient(circle at 30% 40%, #FFFBEB 0%, #FEF3C7 100%);
+      border-radius: 60px 60px 60px 20px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 12px;
       position: relative;
-      box-shadow: 0 10px 25px rgba(251, 191, 36, 0.15);
+      box-shadow: 0 15px 35px rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(234, 179, 8, 0.15);
     }
 
     .mascot-row {
@@ -327,55 +355,47 @@
 
     /* Cloud-shaped dialogue bubbles */
     .cloud-bubble {
-      padding: 10px 14px;
-      border-radius: 20px;
+      background: white;
+      border-radius: 24px;
+      padding: 14px 18px;
       font-size: 11px;
-      line-height: 1.4;
-      background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      line-height: 1.5;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
       position: relative;
-      border: 1px solid rgba(234, 179, 8, 0.3);
+      border: 1px solid rgba(234, 179, 8, 0.2);
+      margin-bottom: 8px;
+      transition: transform 0.2s;
+    }
+    .cloud-bubble:hover {
+      transform: scale(1.01);
     }
 
-    .cloud-bubble::after {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: white;
-      border-right: 1px solid rgba(234, 179, 8, 0.3);
-      border-bottom: 1px solid rgba(234, 179, 8, 0.3);
-    }
-
-    .cloud-bubble.aac {
+    .left-cloud {
       border-left: 4px solid var(--secondary);
     }
-
-    .cloud-bubble.aac::after {
-      left: -6px;
-      top: 50%;
-      transform: translateY(-50%) rotate(135deg);
-    }
-
-    .cloud-bubble.brick {
+    .right-cloud {
       border-left: 4px solid var(--accent);
+      margin-left: 20px;
     }
 
-    .cloud-bubble.brick::after {
-      left: -6px;
+    .cloud-tail {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: white;
+      border-left: 1px solid rgba(234, 179, 8, 0.2);
+      border-bottom: 1px solid rgba(234, 179, 8, 0.2);
+      left: -8px;
       top: 50%;
-      transform: translateY(-50%) rotate(135deg);
+      transform: translateY(-50%) rotate(45deg);
     }
 
     .cloud-bubble strong {
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
       font-size: 10.5px;
       text-transform: uppercase;
     }
-
-    .cloud-bubble.aac strong { color: var(--primary); }
-    .cloud-bubble.brick strong { color: var(--accent); }
 
     /* Features 10 grid */
     .features-badge-grid {
@@ -429,7 +449,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 240mm;
+      height: 220mm;
       position: relative;
     }
 
@@ -449,7 +469,93 @@
       padding: 5px;
       border-radius: 4px;
       border: 1px solid var(--border);
+      z-index: 3;
     }
+
+    .dimension-callout {
+      position: absolute;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 3;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(4px);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .callout-length {
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .callout-length .callout-line {
+      width: 140px;
+      height: 2px;
+      background: var(--secondary);
+      position: relative;
+    }
+    .callout-length .callout-line::before,
+    .callout-length .callout-line::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--secondary);
+      border-left: 2px solid var(--secondary);
+      top: -5px;
+    }
+    .callout-length .callout-line::before { left: 0; transform: rotate(-45deg); }
+    .callout-length .callout-line::after { right: 0; transform: rotate(135deg); }
+    .callout-height {
+      top: 48%;
+      right: 20px;
+      transform: translateY(-50%);
+      flex-direction: column;
+    }
+    .callout-height .callout-line {
+      width: 2px;
+      height: 100px;
+      background: var(--secondary);
+      position: relative;
+    }
+    .callout-height .callout-line::before,
+    .callout-height .callout-line::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--secondary);
+      border-bottom: 2px solid var(--secondary);
+      left: -5px;
+    }
+    .callout-height .callout-line::before { top: 0; transform: rotate(-45deg); }
+    .callout-height .callout-line::after { bottom: 0; transform: rotate(135deg); }
+    .callout-width {
+      bottom: 30px;
+      left: 12px;
+    }
+    .callout-width .callout-line {
+      width: 80px;
+      height: 2px;
+      background: var(--accent);
+      position: relative;
+    }
+    .callout-width .callout-line::before,
+    .callout-width .callout-line::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+      top: -5px;
+    }
+    .callout-width .callout-line::before { left: 0; transform: rotate(-45deg); }
+    .callout-width .callout-line::after { right: 0; transform: rotate(135deg); }
 
     .dimension-labels-container {
       width: 100%;
@@ -658,12 +764,19 @@
       </div>
 
       <div class="cover-middle">
-        <h1>MAXIMUM STRENGTH, <br>MINIMUM WEIGHT<br><span>THE FUTURE OF MASONRY</span></h1>
+        <h1>PRECISION ENGINEERED, <br>MAXIMUM STRENGTH<br><span>STRENGTH REDEFINED</span></h1>
         <p>A smart, green building material engineered for modern infrastructure, offering unmatched thermal insulation, structural strength, and cost savings.</p>
       </div>
 
       <div class="cover-image-box">
-        <img src="./block_stack.png" alt="MEGACON High Precision AAC Blocks Stack">
+        <img src="./hero_blocks_premium.png" alt="MEGACON Premium AAC Blocks">
+      </div>
+
+      <div class="cover-float-block">
+        <img src="./aac_block_transparent.png" alt="" class="float-block-img">
+      </div>
+      <div class="cover-float-block-small">
+        <img src="./aac_block_transparent.png" alt="" class="float-block-img">
       </div>
 
       <div class="cover-bottom">
@@ -711,23 +824,9 @@
         </div>
       </div>
 
-      <!-- Mascot Conversation Cloud Container -->
-      <div class="mascot-cloud-container">
-        <div class="mascot-row">
-          <div class="mascot-img-box">
-            <img src="./mascots.png" alt="MEGACON Mascots Comparison">
-          </div>
-          <div class="cloud-dialogues">
-            <div class="cloud-bubble aac">
-              <strong>Mega-Block</strong>
-              "I'm lightweight, stand 4-6 hrs in fire, block heat, and carry tons with ease! Laying me is 3x faster!"
-            </div>
-            <div class="cloud-bubble brick">
-              <strong>Rusty the Brick</strong>
-              "I absorb water like a sponge, crack easily, and waste so much mortar. I can't compete!"
-            </div>
-          </div>
-        </div>
+      <!-- Mascot Conversation Image Only -->
+      <div class="mascot-image-only-container" style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 15px;">
+        <img src="./mascot_conversation.png" alt="MEGACON Mascots Conversation" style="max-width: 100%; max-height: 250px; object-fit: contain;">
       </div>
     </div>
 
@@ -798,8 +897,21 @@
       <!-- Left Column: Visual isolated block with dimensions labels -->
       <div class="visual-block-holder">
         <img src="./logo.jpeg" alt="MEGACON Brand" class="dimension-overlay-logo">
-        <img src="./isolated_block.png" alt="MEGACON AAC Block Isolated" class="transparent-block-img">
+        <img src="./aac_block_transparent.png" alt="MEGACON AAC Block Dimensions" class="transparent-block-img">
         
+        <div class="dimension-callout callout-length">
+          <span class="callout-line"></span>
+          <span class="callout-label">600 mm</span>
+        </div>
+        <div class="dimension-callout callout-height">
+          <span class="callout-line"></span>
+          <span class="callout-label">200 mm</span>
+        </div>
+        <div class="dimension-callout callout-width">
+          <span class="callout-line"></span>
+          <span class="callout-label">75-400 mm</span>
+        </div>
+
         <div class="dimension-labels-container">
           <h4>Standard Dimension Guide</h4>
           <ul>
@@ -972,7 +1084,7 @@
         </div>
 
         <div class="factory-promo-box">
-          <img src="./factory.png" alt="MEGACON High-Pressure Steam Autoclaves">
+          <img src="./factory_interior.png" alt="MEGACON AAC Block Manufacturing Autoclave">
         </div>
       </div>
     </div>

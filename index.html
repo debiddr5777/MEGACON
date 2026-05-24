@@ -46,12 +46,13 @@
         <p class="hero-description">MEGACON INFRACRETE Autoclaved Aerated Concrete (AAC) blocks deliver superior compressive strength, double the thermal insulation, and save up to 35% on structural weight compared to red clay bricks.</p>
         <div class="hero-actions">
           <a href="#calculator" class="btn btn-primary">Try Budget Calculator</a>
-          <a href="#products" class="btn btn-outline">Explore Dimensions</a>
+          <a href="#products" class="btn btn-outline">View Block Dimensions</a>
+          <a href="#contact" class="btn btn-outline" style="border-color: rgba(255,255,255,0.15);">Get Quote</a>
         </div>
       </div>
       <div class="hero-visual">
         <div class="hero-card">
-          <img src="./assets/block_stack.png" alt="MEGACON High-Precision AAC Blocks Stack" class="hero-img">
+          <img src="./assets/hero_blocks_premium.png" alt="MEGACON Premium AAC Blocks Stack" class="hero-img">
           <div class="hero-card-badge">ISO Certified Plant</div>
         </div>
       </div>
@@ -59,7 +60,7 @@
   </section>
 
   <!-- Mascot Comparison Section -->
-  <section class="mascot-section" id="about">
+  <section class="mascot-section fade-in" id="about">
     <div class="container">
       <div class="section-header text-center">
         <span class="section-subtitle">MEGACON Advantage</span>
@@ -67,37 +68,9 @@
         <p class="section-description">See why leading structural engineers choose Autoclaved Aerated Concrete over traditional bricks in this interactive comparison.</p>
       </div>
 
-      <!-- Mascot Interactive Grid with Cloud Bubble designs -->
-      <div class="mascot-interactive-grid cloud-shape-grid">
-        <div class="mascot-card no-block">
-          <div class="mascot-img-wrap transparent-bg">
-            <img src="./assets/mascots.png" alt="MEGACON Mascots Comparison" class="mascot-main-img">
-          </div>
-        </div>
-        
-        <div class="dialogue-container cloud-dialogues">
-          <div class="dialogue-bubble left-bubble cloud-bubble aac" id="bubble-aac">
-            <div class="bubble-header">
-              <span class="bubble-name text-yellow">Mega-Block (AAC Block)</span>
-              <span class="bubble-tag">Champion</span>
-            </div>
-            <p class="bubble-text">"Hey Rusty! Still struggling to carry that load? I weigh 1/3rd of your weight, carry more compressive strength, and block heat perfectly. Plus, laying one of me is equivalent to laying 9 of you! Why stick to old clay?"</p>
-          </div>
-
-          <div class="dialogue-bubble right-bubble cloud-bubble brick" id="bubble-brick">
-            <div class="bubble-header">
-              <span class="bubble-name text-red">Rusty (Clay Brick)</span>
-              <span class="bubble-tag-bad">Outdated</span>
-            </div>
-            <p class="bubble-text">"Ugh... tell me about it, Mega-Block. I'm soaking up water like crazy (over 20% absorption!), cracking under high stress, and costing builders a fortune in cement mortar and plaster. I'm just too exhausted..."</p>
-          </div>
-
-          <div class="dialogue-controls">
-            <button class="btn btn-sm btn-yellow active" id="btn-show-aac">Mega-Block Info</button>
-            <button class="btn btn-sm btn-outline" id="btn-show-brick">Rusty's Drawbacks</button>
-            <button class="btn btn-sm btn-outline" id="btn-show-both">Show Both</button>
-          </div>
-        </div>
+      <!-- Mascot Image Only -->
+      <div class="mascot-image-only-container" style="display: flex; justify-content: center; align-items: center; width: 100%; margin-bottom: 50px;">
+        <img src="./assets/mascot_conversation.png" alt="MEGACON Mascots Conversation" style="max-width: 100%; max-height: 400px; object-fit: contain;">
       </div>
 
       <!-- Feature Rings -->
@@ -127,7 +100,7 @@
   </section>
 
   <!-- Dimensions Section -->
-  <section class="products-section" id="products">
+  <section class="products-section fade-in" id="products">
     <div class="container">
       <div class="section-header text-center">
         <span class="section-subtitle">Size Matrix</span>
@@ -137,7 +110,7 @@
 
       <div class="dimensions-interactive-grid">
         <div class="dimensions-visual-card transparent-bg">
-          <img src="./assets/isolated_block.png" alt="AAC Block Dimensions" class="block-visual transparent-block">
+          <img src="./assets/aac_block_transparent.png" alt="AAC Block Dimensions" class="block-visual transparent-block">
           <div class="block-details-overlay">
             <h4>MEGACON Block Spec</h4>
             <ul>
@@ -242,7 +215,7 @@
   </section>
 
   <!-- Technical Specs Tab Panel -->
-  <section class="tech-section" id="tech-specs">
+  <section class="tech-section fade-in" id="tech-specs">
     <div class="container">
       <div class="section-header text-center">
         <span class="section-subtitle">Parameters</span>
@@ -359,7 +332,7 @@
   </section>
 
   <!-- Interactive Budget Calculator Section -->
-  <section class="calculator-section" id="calculator">
+  <section class="calculator-section fade-in" id="calculator">
     <div class="container">
       <div class="section-header text-center">
         <span class="section-subtitle">Real-Time Estimator</span>
@@ -514,7 +487,7 @@
   </section>
 
   <!-- Contact Us Section -->
-  <section class="contact-section" id="contact">
+  <section class="contact-section fade-in" id="contact">
     <div class="container contact-grid">
       <div class="contact-info-panel">
         <span class="section-subtitle">Get in Touch</span>
@@ -554,24 +527,25 @@
 
       <div class="contact-form-panel">
         <h3>Request a Quote / Free Sample</h3>
-        <form class="quote-form" id="quote-form">
+        <form class="quote-form" id="quote-form" action="https://formspree.io/f/mldnkgoe" method="POST">
+          <input type="hidden" name="_subject" value="New MEGACON Quotation Request">
           <div class="input-group">
             <label for="form-name">Contact Person Name</label>
-            <input type="text" id="form-name" placeholder="Enter your full name" required>
+            <input type="text" id="form-name" name="name" placeholder="Enter your full name" required>
           </div>
           <div class="input-grid">
             <div class="input-group">
               <label for="form-phone">Phone Number</label>
-              <input type="tel" id="form-phone" placeholder="10-digit mobile" required>
+              <input type="tel" id="form-phone" name="phone" placeholder="10-digit mobile" required>
             </div>
             <div class="input-group">
               <label for="form-site">Delivery Location</label>
-              <input type="text" id="form-site" placeholder="e.g. Bhubaneswar" required>
+              <input type="text" id="form-site" name="location" placeholder="e.g. Bhubaneswar" required>
             </div>
           </div>
           <div class="input-group">
             <label for="form-requirement">Brief Project Details</label>
-            <textarea id="form-requirement" rows="4" placeholder="Mention total block volume required (CBM) or residential square footage..." required></textarea>
+            <textarea id="form-requirement" name="requirement" rows="4" placeholder="Mention total block volume required (CBM) or residential square footage..." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Submit Quotation Request</button>
         </form>
@@ -586,7 +560,7 @@
       <p>&copy; 2026 MEGACON INFRACRETE Pvt. Ltd. All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="#hero">Back to Top</a>
-        <a href="./brochure/index.html" target="_blank" class="brochure-download-link">📄 Open Printable Brochure</a>
+        <a href="../brochure/index.html" target="_blank" class="brochure-download-link">📄 Open Printable Brochure</a>
       </div>
     </div>
   </footer>

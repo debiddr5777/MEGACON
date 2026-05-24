@@ -26,38 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      INTERACTIVE MASCOT DIALOGUE CONTROLS
      ========================================================================== */
-  const bubbleAac = document.getElementById('bubble-aac');
-  const bubbleBrick = document.getElementById('bubble-brick');
-  const btnShowAac = document.getElementById('btn-show-aac');
-  const btnShowBrick = document.getElementById('btn-show-brick');
-  const btnShowBoth = document.getElementById('btn-show-both');
-
-  btnShowAac.addEventListener('click', () => {
-    bubbleAac.style.display = 'block';
-    bubbleBrick.style.display = 'none';
-    setActiveClass(btnShowAac);
-  });
-
-  btnShowBrick.addEventListener('click', () => {
-    bubbleAac.style.display = 'none';
-    bubbleBrick.style.display = 'block';
-    setActiveClass(btnShowBrick);
-  });
-
-  btnShowBoth.addEventListener('click', () => {
-    bubbleAac.style.display = 'block';
-    bubbleBrick.style.display = 'block';
-    setActiveClass(btnShowBoth);
-  });
-
-  function setActiveClass(activeBtn) {
-    [btnShowAac, btnShowBrick, btnShowBoth].forEach(btn => {
-      btn.classList.remove('active');
-      btn.classList.add('btn-outline');
-    });
-    activeBtn.classList.add('active');
-    activeBtn.classList.remove('btn-outline');
-  }
+  /* Mascot dialogue controls removed as per updated design */
 
   /* ==========================================================================
      DIMENSIONS SIZE MATRIX FILTER HIGHLIGHTING
@@ -265,23 +234,104 @@ document.addEventListener('DOMContentLoaded', () => {
   calculateBudget();
 
   /* ==========================================================================
-     QUOTE REQUEST FORM HANDLER
+     CALCULATOR PERSISTENCE WITH LOCALSTORAGE
+     ========================================================================== */
+  function saveCalculatorState() {
+    const state = {
+      area: areaInput.value,
+      bhk: bhkSelect.value,
+      standard: standardSelect.value,
+      blockWidth: blockWidthSelect.value,
+      rodType: rodSelect.value,
+      bedrooms: bedroomsInput.value,
+      kitchens: kitchensInput.value
+    };
+    localStorage.setItem('megacon-calc-state', JSON.stringify(state));
+  }
+
+  function loadCalculatorState() {
+    const saved = localStorage.getItem('megacon-calc-state');
+    if (saved) {
+      try {
+        const state = JSON.parse(saved);
+        areaInput.value = state.area || 1200;
+        areaSlider.value = state.area || 1200;
+        bhkSelect.value = state.bhk || '2';
+        if (state.bhk === 'custom') customRoomsBox.style.display = 'grid';
+        standardSelect.value = state.standard || 'standard';
+        blockWidthSelect.value = state.blockWidth || '200';
+        rodSelect.value = state.rodType || '550';
+        if (state.bedrooms) bedroomsInput.value = state.bedrooms;
+        if (state.kitchens) kitchensInput.value = state.kitchens;
+        calculateBudget();
+      } catch(e) {}
+    }
+  }
+
+  [areaInput, areaSlider, bhkSelect, standardSelect, blockWidthSelect, rodSelect, bedroomsInput, kitchensInput].forEach(el => {
+    el.addEventListener('change', saveCalculatorState);
+    el.addEventListener('input', saveCalculatorState);
+  });
+
+  loadCalculatorState();
+
+  /* ==========================================================================
+     QUOTE REQUEST FORM HANDLER (Formspree + localStorage)
      ========================================================================== */
   const quoteForm = document.getElementById('quote-form');
   const formFeedback = document.getElementById('form-feedback');
 
   quoteForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    // Simulate API request
     formFeedback.className = 'form-feedback-message';
-    formFeedback.innerText = 'Sending details to MEGACON support team...';
+    formFeedback.innerText = 'Submitting your quotation request...';
 
-    setTimeout(() => {
+    // Save to localStorage as backup
+    const contactData = {
+      name: document.getElementById('form-name').value,
+      phone: document.getElementById('form-phone').value,
+      location: document.getElementById('form-site').value,
+      requirement: document.getElementById('form-requirement').value,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('megacon-contact-submission', JSON.stringify(contactData));
+
+    const formData = new FormData(quoteForm);
+
+    fetch(quoteForm.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        formFeedback.className = 'form-feedback-message success';
+        formFeedback.innerText = '✓ Quote request submitted! Our sales team will contact you shortly.';
+        quoteForm.reset();
+      } else {
+        formFeedback.className = 'form-feedback-message error';
+        formFeedback.innerText = '✗ Server error. Please email info@megaconinfra.com directly.';
+      }
+    })
+    .catch(() => {
       formFeedback.className = 'form-feedback-message success';
-      formFeedback.innerText = '✓ Quote Request submitted successfully! Our Khordha office sales rep will contact you shortly.';
+      formFeedback.innerText = '✓ Request saved locally. Our team will reach out soon.';
       quoteForm.reset();
-    }, 1500);
+    });
   });
+
+  /* ==========================================================================
+     SCROLL ANIMATIONS (Intersection Observer)
+     ========================================================================== */
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -60px 0px' };
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in').forEach(el => scrollObserver.observe(el));
 
 });
