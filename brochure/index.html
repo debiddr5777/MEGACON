@@ -103,12 +103,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: linear-gradient(135deg, var(--primary) 65%, #1E293B 100%);
-      padding: 20px;
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.95) 100%), url('./hero_blocks_premium.png') center/cover no-repeat;
+      padding: 40px;
       border: 8px solid var(--secondary);
       border-radius: 4px;
       color: #FFFFFF;
       position: relative;
+      box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
     }
 
     .cover-top {
@@ -144,28 +145,39 @@
     }
 
     .cover-middle {
-      margin: 40px 0;
+      margin: auto 0;
+      padding: 20px 0;
     }
 
     .cover-middle h1 {
-      font-size: 38px;
-      font-weight: 800;
-      line-height: 1.15;
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.1;
       text-transform: uppercase;
-      letter-spacing: -0.5px;
-      margin-bottom: 15px;
+      letter-spacing: -1px;
+      margin-bottom: 25px;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.7);
     }
 
     .cover-middle h1 span {
       color: var(--secondary);
+      display: block;
+      margin-top: 5px;
+      font-size: 56px;
     }
 
     .cover-middle p {
       font-size: 18px;
-      color: #94A3B8;
-      font-weight: 300;
-      border-left: 4px solid var(--secondary);
-      padding-left: 15px;
+      color: #F8FAFC;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 85%;
+      border-left: 5px solid var(--secondary);
+      padding-left: 20px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.2);
+      padding: 10px 10px 10px 20px;
+      border-radius: 0 8px 8px 0;
     }
 
     .cover-float-block {
@@ -195,28 +207,20 @@
     }
 
     .cover-image-box {
-      width: 100%;
-      height: 250px;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 3px solid rgba(255,255,255,0.1);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 2;
-    }
-
-    .cover-image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      display: none; /* Replaced by full background */
     }
 
     .cover-bottom {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 20px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
     .cover-company-info h3 {
