@@ -503,7 +503,7 @@
             <span class="detail-icon">📍</span>
             <div>
               <h4>Manufacturing Plant & Office</h4>
-              <p>Plot No. 3293, Goda Lokanath Road, Dadhimachagadia, Kaipadar, Khordha, Odisha - 752056</p>
+              <p><a href="https://www.google.com/maps/search/?api=1&query=MEGACON+INFRACRETE+PVT.+LTD.+Plot+No.+3293,+Goda+Lokanath+Road,+Dadhimachagadia,+Kaipadar,+Khordha,+Odisha+-+752056" target="_blank" style="color: #94A3B8; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='#F59E0B'" onmouseout="this.style.color='#94A3B8'">Plot No. 3293, Goda Lokanath Road, Dadhimachagadia, Kaipadar, Khordha, Odisha - 752056</a></p>
             </div>
           </div>
           <div class="contact-detail-item">
@@ -540,11 +540,28 @@
           <div class="input-grid">
             <div class="input-group">
               <label for="form-phone">Phone Number</label>
-              <input type="tel" id="form-phone" name="phone" placeholder="10-digit mobile" required>
+              <input type="tel" id="form-phone" name="phone" placeholder="10-digit mobile" pattern="[0-9]{10}" title="Please enter exactly 10 digits" maxlength="10" required>
             </div>
             <div class="input-group">
               <label for="form-site">Delivery Location</label>
-              <input type="text" id="form-site" name="location" placeholder="e.g. Bhubaneswar" required>
+              <select id="form-site" name="location" required>
+                <option value="" disabled selected>Select Delivery City</option>
+                <option value="Bhubaneswar">Bhubaneswar</option>
+                <option value="Cuttack">Cuttack</option>
+                <option value="Khordha">Khordha</option>
+                <option value="Puri">Puri</option>
+                <option value="Rourkela">Rourkela</option>
+                <option value="Berhampur">Berhampur</option>
+                <option value="Sambalpur">Sambalpur</option>
+                <option value="Balasore">Balasore</option>
+                <option value="Bhadrak">Bhadrak</option>
+                <option value="Baripada">Baripada</option>
+                <option value="Jharsuguda">Jharsuguda</option>
+                <option value="Angul">Angul</option>
+                <option value="Nayagarh">Nayagarh</option>
+                <option value="Dhenkanal">Dhenkanal</option>
+                <option value="Other">Other (Odisha)</option>
+              </select>
             </div>
           </div>
           <div class="input-group">
