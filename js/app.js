@@ -24,6 +24,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
+     THEME TOGGLE
+     ========================================================================== */
+  const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = themeToggle.querySelector('.sun-icon');
+  const moonIcon = themeToggle.querySelector('.moon-icon');
+
+  function setTheme(isLight) {
+    if (isLight) {
+      document.documentElement.classList.add('light-theme');
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'block';
+      localStorage.setItem('megaconTheme', 'light');
+    } else {
+      document.documentElement.classList.remove('light-theme');
+      sunIcon.style.display = 'block';
+      moonIcon.style.display = 'none';
+      localStorage.setItem('megaconTheme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('megaconTheme');
+  if (savedTheme === 'light') {
+    setTheme(true);
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const isLightNow = document.documentElement.classList.contains('light-theme');
+    setTheme(!isLightNow);
+  });
+
+  /* ==========================================================================
      INTERACTIVE MASCOT DIALOGUE CONTROLS
      ========================================================================== */
   /* Mascot dialogue controls removed as per updated design */
