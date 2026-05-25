@@ -112,7 +112,8 @@ body {
   opacity: 0;
   animation: logoIn 0.5s 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.loader-logo img {
+.loader-logo img,
+.loader-logo video {
   height: 72px;
   background: #fff;
   padding: 8px 20px;
@@ -408,8 +409,9 @@ section {
   align-items: center;
 }
 
-.logo-link img {
-  height: 48px;
+.logo-link img,
+.logo-link video {
+  height: 72px;
   object-fit: contain;
   background: white;
   padding: 6px;
@@ -417,7 +419,8 @@ section {
   transition: var(--transition-smooth);
 }
 
-.logo-link img:hover {
+.logo-link img:hover,
+.logo-link video:hover {
   transform: scale(1.03);
 }
 
@@ -536,6 +539,21 @@ section {
   height: 100%;
   background: radial-gradient(circle at 80% 20%, rgba(234, 179, 8, 0.1) 0%, transparent 60%);
   pointer-events: none;
+}
+
+.hero-bg-logo {
+  position: absolute;
+  top: 50%;
+  width: 400px;
+  opacity: 0.06;
+  pointer-events: none;
+  object-fit: contain;
+  z-index: 0;
+}
+
+.hero-bg-left {
+  left: -30px;
+  transform: translateY(-50%) rotate(-8deg) scale(2.025);
 }
 
 .hero-container {
@@ -1607,7 +1625,8 @@ select option {
     letter-spacing: 2px;
   }
 
-  .loader-logo img {
+  .loader-logo img,
+  .loader-logo video {
     height: 44px;
     padding: 5px 12px;
   }
