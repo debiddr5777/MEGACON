@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Stylesheet -->
   <link rel="stylesheet" href="./css/style.css?v=4">
   <script>
@@ -18,6 +18,48 @@
   </script>
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <img src="./assets/logo.jpeg" alt="MEGACON">
+      </div>
+      <div class="loader-wall">
+        <div class="ld-block ld-b1">
+          <div class="ld-pixels" style="--cols:4;--rows:4">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="ld-block ld-b2">
+          <div class="ld-pixels" style="--cols:4;--rows:6">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="ld-block ld-b3">
+          <div class="ld-pixels" style="--cols:4;--rows:8">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+      <p class="loader-tag">AAC Blocks &mdash; Building the Future</p>
+    </div>
+  </div>
 
   <!-- Header / Navigation -->
   <header class="main-header">
@@ -83,12 +125,12 @@
         <p class="section-description">See why leading structural engineers choose Autoclaved Aerated Concrete over traditional bricks in this interactive comparison.</p>
       </div>
 
-      <!-- Mascot Image Only -->
-      <div class="mascot-image-only-container" style="display: flex; justify-content: center; align-items: center; width: 100%; margin-bottom: 50px;">
-        <img src="./assets/mascot_conversation.png" alt="MEGACON Mascots Conversation" style="max-width: 100%; max-height: 400px; object-fit: contain;">
+      <!-- Mascot Image -->
+      <div class="mascot-image-wrap">
+        <img src="./assets/mascot_conversation.png" alt="MEGACON Mascots Conversation">
       </div>
 
-      <!-- Feature Rings -->
+      <!-- Features Grid -->
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🛡️</div>

@@ -374,4 +374,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.fade-in').forEach(el => scrollObserver.observe(el));
 
+  /* ==========================================================================
+     LOADING SCREEN
+     ========================================================================== */
+  const loader = document.getElementById('loader');
+  if (loader) {
+    const startTime = Date.now();
+    const hideLoader = () => {
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, 3200 - elapsed);
+      setTimeout(() => loader.classList.add('hidden'), remaining);
+    };
+    if (document.readyState === 'complete') {
+      hideLoader();
+    } else {
+      window.addEventListener('load', hideLoader);
+    }
+  }
+
 });
