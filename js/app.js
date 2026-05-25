@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Load saved theme
+  // Load saved theme — default to light
   const savedTheme = localStorage.getItem('megaconTheme');
-  if (savedTheme === 'light') {
+  if (savedTheme !== 'dark') {
     setTheme(true);
   }
 
@@ -379,17 +379,386 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const loader = document.getElementById('loader');
   if (loader) {
+    const loaderVideo = loader.querySelector('video');
     const startTime = Date.now();
     const hideLoader = () => {
       const elapsed = Date.now() - startTime;
       const remaining = Math.max(0, 3200 - elapsed);
-      setTimeout(() => loader.classList.add('hidden'), remaining);
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        if (loaderVideo) { loaderVideo.pause(); loaderVideo.remove(); }
+      }, remaining);
     };
     if (document.readyState === 'complete') {
       hideLoader();
     } else {
       window.addEventListener('load', hideLoader);
     }
+    setTimeout(() => {
+      if (!loader.classList.contains('hidden')) {
+        loader.classList.add('hidden');
+        if (loaderVideo) { loaderVideo.pause(); loaderVideo.remove(); }
+      }
+    }, 6000);
   }
 
+  /* ==========================================================================
+     AI CHAT ASSISTANT
+     ========================================================================== */
+
+  const knowledgeBase = [
+    {
+      keywords: ['hello', 'hi', 'hey', 'good morning', 'good evening', 'namaste', 'howdy'],
+      answer: 'Hello! 👋 Welcome to MEGACON INFRACRETE. How can I assist you today? You can ask about our AAC blocks, technical specs, pricing, or contact details.'
+    },
+    {
+      keywords: ['what is megacon', 'who are you', 'company', 'about', 'tell me about'],
+      answer: 'MEGACON INFRACRETE Pvt. Ltd. is a premium AAC (Autoclaved Aerated Concrete) blocks manufacturer based in Khordha, Odisha. We produce high-precision, IS 2185 (Part 3) compliant AAC blocks with superior compressive strength, thermal insulation, and fire resistance.'
+    },
+    {
+      keywords: ['address', 'located', 'location', 'plant', 'factory', 'where'],
+      answer: '📍 Our manufacturing plant & office is located at: Plot No. 3293, Goda Lokanath Road, Dadhimachagadia, Kaipadar, Khordha, Odisha - 752056.'
+    },
+    {
+      keywords: ['phone', 'call', 'contact', 'mobile', 'whatsapp', 'reach'],
+      answer: '📞 You can reach our sales support desk at:\n• +91 78305 03010\n• +91 78307 05080\nCall us for quotes, sample requests, or any project inquiries.'
+    },
+    {
+      keywords: ['email', 'mail', 'info@', 'send email'],
+      answer: '✉️ Email us at: info@megaconinfra.com\nWe respond within 24 hours.'
+    },
+    {
+      keywords: ['gst', 'gstin', 'tax', 'pan', 'registration'],
+      answer: '📋 Our tax details:\n• GSTIN: 21AASCM0769R1ZP\n• PAN: AASCM0769R'
+    },
+    {
+      keywords: ['aac block', 'product', 'blocks', 'what do you make', 'manufacture'],
+      answer: 'We manufacture premium AAC (Autoclaved Aerated Concrete) blocks made from 100% pure fly ash. Our blocks come in standard size 600mm x 200mm with thicknesses from 75mm up to 400mm. They are lightweight, fire-resistant, thermally insulating, and dimensionally accurate to ±1.0mm.'
+    },
+    {
+      keywords: ['dimension', 'size', 'length', 'height', 'width', 'thickness', 'measurement'],
+      answer: '📐 Standard MEGACON Block Spec:\n• Length: 600 mm (24")\n• Height: 200 mm (8")\n• Widths available: 75mm, 100mm, 150mm, 200mm, 300mm, 400mm\n\nTolerance: Length & Height ±3mm, Width ±2mm.'
+    },
+    {
+      keywords: ['price', 'cost', 'rate', 'pricing', 'how much', 'budget', 'quote'],
+      answer: '💰 Our blocks are priced at approximately ₹4,200 per CBM. For a complete project estimate, use our Budget Calculator in the navigation menu. You can also request a personalized quote via the Contact form or call +91 78305 03010.'
+    },
+    {
+      keywords: ['strength', 'compressive', 'density', 'how strong'],
+      answer: '💪 MEGACON AAC blocks deliver:\n• Compressive Strength: > 4.0 N/mm² (IS minimum is 3.0)\n• Dry Density: 560 - 640 Kg/m³\n• This means they are lightweight yet stronger than traditional red bricks!'
+    },
+    {
+      keywords: ['fire', 'fire rating', 'fire resistance', 'safety'],
+      answer: '🛡️ Our AAC blocks provide 4 to 6 hours of fire resistance (depending on block width). They block heat transfer and stay structurally stable under intense fire — ideal for high-rise and commercial buildings.'
+    },
+    {
+      keywords: ['thermal', 'insulation', 'cool', 'heat', 'temperature', 'energy'],
+      answer: '❄️ MEGACON AAC blocks have a thermal conductivity of 0.16 - 0.21 W/mK — that\'s 4x better than red clay bricks. This keeps your interiors cool in summer and warm in winter, reducing AC costs significantly.'
+    },
+    {
+      keywords: ['vs', 'versus', 'compared', 'red brick', 'clay brick', 'better than'],
+      answer: '🏆 MEGACON AAC vs Red Clay Bricks:\n• Size Precision: ±1.0mm vs ±3.15mm ✅\n• Compressive Strength: 4.0+ vs 2.5-3.0 N/mm² ✅\n• Thermal Insulation: 0.16-0.21 vs 0.81 W/mK ✅\n• Weight: 560-640 vs 1950-2000 kg/m³ ✅\n• Fire Resistance: 4-6 Hrs vs 2 Hrs ✅\n• Water Absorption: <10% vs 15-20% ✅'
+    },
+    {
+      keywords: ['water', 'absorption', 'moisture', 'damp'],
+      answer: '💧 Our AAC blocks absorb less than 10% of their dry weight in water — half that of red clay bricks. This means less dampness and longer-lasting walls.'
+    },
+    {
+      keywords: ['sound', 'acoustic', 'noise', 'dB', 'insulation'],
+      answer: '🔇 MEGACON AAC blocks block 38 to 44 dB of sound, compared to only 30-34 dB for red clay bricks. Perfect for peaceful indoor environments.'
+    },
+    {
+      keywords: ['shrinkage', 'crack', 'drying', 'settlement'],
+      answer: '📉 Our drying shrinkage is just 0.04% (IS max allows 0.05%). This means minimal cracking and superior long-term dimensional stability.'
+    },
+    {
+      keywords: ['is 2185', 'bis', 'standard', 'compliance', 'certification', 'iso'],
+      answer: '✅ MEGACON blocks are manufactured strictly to IS 2185 (Part 3) standards. Our plant is ISO Certified. We use high-pressure autoclave chambers at 12 bar / 190°C to form Tobermorite crystals for maximum strength.'
+    },
+    {
+      keywords: ['delivery', 'shipping', 'transport', 'supply', 'deliver'],
+      answer: '🚚 We deliver across Khordha, Bhubaneswar, Cuttack, Puri, Rourkela, Berhampur, Sambalpur, Balasore, Bhadrak, Baripada, Jharsuguda, Angul, Nayagarh, Dhenkanal, and other regions in Odisha.'
+    },
+    {
+      keywords: ['calculator', 'estimate', 'cost calculator', 'budget calculator'],
+      answer: '🧮 Head over to the "Cost Calculator" section in the navigation menu! It gives you a real-time estimate of blocks, steel, adhesive, and labor costs based on your project size and configuration.'
+    },
+    {
+      keywords: ['sample', 'free sample', 'load inspection', 'test', 'quality'],
+      answer: '📦 Yes! We offer free samples and load inspections. Contact our sales team at +91 78305 03010 or fill out the quote form to schedule a visit.'
+    },
+    {
+      keywords: ['thank', 'thanks', 'thx', 'appreciate'],
+      answer: 'You\'re welcome! 😊 If you have more questions, feel free to ask. You can also request a quote or call us at +91 78305 03010 anytime.'
+    },
+    {
+      keywords: ['mortar', 'adhesive', 'joint', 'thin bed'],
+      answer: '🧪 We recommend thin-bed joint adhesive for our AAC blocks. You save up to 60% on joint mortar compared to traditional brick-laying. Each 40kg bag covers approximately 0.4 CBM of blocks.'
+    },
+    {
+      keywords: ['steel', 'reinforcement', 'tmt', 'rod', 'fe 500', 'fe 550'],
+      answer: '⚡ Our calculator supports Fe 500, Fe 550D (Super Ductile), and Fe 600 TMT reinforcement rods. The right grade depends on your structural requirements — Fe 550D is our recommended standard.'
+    },
+    {
+      keywords: ['labor', 'masonry', 'worker', 'installation', 'build'],
+      answer: '👷 Our standard masonry labor estimate is ₹25 per Sq.Ft. AAC blocks are easier and faster to install than red bricks due to their precise dimensions and lightweight nature.'
+    },
+    {
+      keywords: ['brochure', 'print', 'pdf', 'catalog'],
+      answer: '📄 You can view and print our detailed brochure by clicking "Open Printable Brochure" link in the website footer. It contains all technical specs, dimensions, and comparison data in A4 format.'
+    }
+  ];
+
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const chatClose = document.getElementById('chat-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+
+  function toggleChat(open) {
+    if (open) {
+      chatPanel.classList.add('open');
+      chatToggle.style.display = 'none';
+      chatInput.focus();
+    } else {
+      chatPanel.classList.remove('open');
+      chatToggle.style.display = 'flex';
+    }
+  }
+
+  chatToggle.addEventListener('click', () => toggleChat(true));
+  chatClose.addEventListener('click', () => toggleChat(false));
+
+  function addMessage(text, type) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${type}`;
+    div.innerHTML = `<div class="msg-content">${text}</div><div class="msg-time">Just now</div>`;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'chat-typing';
+    div.id = 'chat-typing-indicator';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function hideTyping() {
+    const el = document.getElementById('chat-typing-indicator');
+    if (el) el.remove();
+  }
+
+  function findAnswer(query, formState) {
+    const q = query.toLowerCase().trim();
+
+    if (formState.active) {
+      return null;
+    }
+
+    const quoteTriggers = ['get quote', 'request quote', 'submit enquiry', 'book order', 'place order', 'i need quote', 'want quote', 'quote request', 'contact form', 'enquire now', 'i want to order', 'submit request'];
+    for (const t of quoteTriggers) {
+      if (q.includes(t)) return '__START_FORM__';
+    }
+
+    for (const entry of knowledgeBase) {
+      for (const kw of entry.keywords) {
+        if (q.includes(kw)) {
+          return entry.answer;
+        }
+      }
+    }
+    return null;
+  }
+
+  function getFallbackAnswer() {
+    return 'I\'m not sure I understand. 🤔 Try asking about:\n\n• Our AAC block products & dimensions\n• Technical specifications & standards\n• Pricing & budget estimates\n• Contact details & delivery areas\n• AAC vs Red clay brick comparison\n\nOr type "hello" to start over!';
+  }
+
+  const formState = { active: false, step: 'name', data: {} };
+  const formQuestions = {
+    name: "Let's get started! \u{1F680}\n\nPlease enter your full name:",
+    phone: 'Great! Now enter your 10-digit phone number:',
+    location: 'Which city/location in Odisha should we deliver to?',
+    requirement: 'Finally, briefly describe your project requirement (e.g., total Sq.Ft or block volume needed):'
+  };
+
+  const suggestionSets = {
+    main: [
+      'About MEGACON', 'Block Dimensions', 'Technical Specs',
+      'Pricing', 'AAC vs Red Brick', 'Delivery Areas',
+      'Get Quote', 'Contact Info'
+    ],
+    quote: [
+      'Back to Menu'
+    ]
+  };
+
+  const chipToQuery = {
+    'About MEGACON': 'tell me about megacon',
+    'Block Dimensions': 'block dimensions',
+    'Technical Specs': 'technical specifications',
+    'Pricing': 'pricing',
+    'AAC vs Red Brick': 'aac vs red brick',
+    'Delivery Areas': 'delivery areas',
+    'Get Quote': 'get quote',
+    'Contact Info': 'contact info'
+  };
+
+  const suggestionsContainer = document.getElementById('chat-suggestions');
+
+  function renderSuggestions(setName) {
+    suggestionsContainer.innerHTML = '';
+    const chips = suggestionSets[setName] || [];
+    chips.forEach(label => {
+      const chip = document.createElement('span');
+      chip.className = 'chat-suggestion-chip';
+      chip.textContent = label;
+      chip.addEventListener('click', () => handleChipClick(label));
+      suggestionsContainer.appendChild(chip);
+    });
+  }
+
+  function clearSuggestions() {
+    suggestionsContainer.innerHTML = '';
+  }
+
+  function handleChipClick(label) {
+    if (label === 'Back to Menu') {
+      renderSuggestions('main');
+      return;
+    }
+    const query = chipToQuery[label] || label;
+    chatInput.value = query;
+    handleSend();
+  }
+
+  function startFormFlow() {
+    formState.active = true;
+    formState.step = 'name';
+    formState.data = {};
+    clearSuggestions();
+    addMessage(formQuestions.name, 'bot');
+  }
+
+  function handleFormInput(text) {
+    const step = formState.step;
+
+    if (step === 'name') {
+      if (text.length < 2) {
+        addMessage('Please enter a valid name (at least 2 characters).', 'bot');
+        return;
+      }
+      formState.data.name = text;
+      formState.step = 'phone';
+      addMessage(formQuestions.phone, 'bot');
+    }
+    else if (step === 'phone') {
+      const digits = text.replace(/[^0-9]/g, '');
+      if (digits.length !== 10) {
+        addMessage('Please enter a valid 10-digit phone number.', 'bot');
+        return;
+      }
+      formState.data.phone = digits;
+      formState.step = 'location';
+      addMessage(formQuestions.location, 'bot');
+    }
+    else if (step === 'location') {
+      if (text.length < 2) {
+        addMessage('Please enter a valid city/location name.', 'bot');
+        return;
+      }
+      formState.data.location = text;
+      formState.step = 'requirement';
+      addMessage(formQuestions.requirement, 'bot');
+    }
+    else if (step === 'requirement') {
+      if (text.length < 5) {
+        addMessage('Please enter a brief project description (at least 5 characters).', 'bot');
+        return;
+      }
+      formState.data.requirement = text;
+      formState.data.timestamp = new Date().toISOString();
+      submitChatForm();
+    }
+  }
+
+  function submitChatForm() {
+    showTyping();
+
+    localStorage.setItem('megacon-contact-submission', JSON.stringify(formState.data));
+
+    const formData = new FormData();
+    formData.append('_subject', 'New MEGACON Quotation Request (from Chat)');
+    formData.append('name', formState.data.name);
+    formData.append('phone', formState.data.phone);
+    formData.append('location', formState.data.location);
+    formData.append('requirement', formState.data.requirement);
+
+    fetch('https://formspree.io/f/mldnkgoe', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      hideTyping();
+      if (response.ok) {
+        addMessage('Thank you, ' + formState.data.name + '! Your quotation request has been submitted successfully. Our sales team will contact you within 24 hours at ' + formState.data.phone + '.\n\n📌 We also saved a copy locally for your reference.', 'bot');
+      } else {
+        addMessage('Thank you, ' + formState.data.name + '! Your details have been saved locally. Our sales team will reach out to you soon at ' + formState.data.phone + '.\n\n(You can also email us at info@megaconinfra.com)', 'bot');
+      }
+      formState.active = false;
+      renderSuggestions('main');
+    })
+    .catch(() => {
+      hideTyping();
+      addMessage('Thank you, ' + formState.data.name + '! Your details have been saved locally. Our sales team will contact you shortly at ' + formState.data.phone + '.\n\nYou can also email us at info@megaconinfra.com for immediate assistance.', 'bot');
+      formState.active = false;
+      renderSuggestions('main');
+    });
+  }
+
+  function handleSend() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    chatInput.value = '';
+
+    if (formState.active) {
+      addMessage(text, 'user');
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        handleFormInput(text);
+      }, 400 + Math.random() * 300);
+      return;
+    }
+
+    addMessage(text, 'user');
+    showTyping();
+    clearSuggestions();
+
+    setTimeout(() => {
+      hideTyping();
+      const answer = findAnswer(text, formState);
+      if (answer === '__START_FORM__') {
+        startFormFlow();
+      } else if (answer) {
+        addMessage(answer, 'bot');
+        renderSuggestions('main');
+      } else {
+        addMessage(getFallbackAnswer(), 'bot');
+        renderSuggestions('main');
+      }
+    }, 600 + Math.random() * 400);
+  }
+
+  chatSend.addEventListener('click', handleSend);
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleSend();
+  });
+
+  renderSuggestions('main');
 });
