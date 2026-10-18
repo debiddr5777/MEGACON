@@ -761,4 +761,475 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderSuggestions('main');
+
+  /* ==========================================================================
+     HERO CONSTRUCTION CANVAS ANIMATION
+     ========================================================================== */
+  const ConstructionAnimation = (() => {
+    const canvas = document.getElementById('construction-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const statsEl = document.getElementById('construction-stats');
+    const finalMessageEl = document.getElementById('final-message');
+    const floorsEl = document.getElementById('stat-floors');
+    const blocksEl = document.getElementById('stat-blocks');
+    const heightEl = document.getElementById('stat-height');
+
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+    let animationId = null;
+    let startTime = 0;
+    let phase = 'building'; // 'building', 'windows', 'finishing', 'message'
+    let phaseStartTime = 0;
+
+    // Building parameters
+    const building = {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+      floors: 0,
+      targetFloors: 45,
+      currentFloor: 0,
+      floorHeight: 0,
+      blockSize: { w: 0, h: 0 },
+      blocksPerFloor: 0,
+      blocksPlaced: 0,
+      totalBlocks: 0,
+      windows: [],
+      cranes: [],
+      particles: []
+    };
+
+    // Colors (MEGACON brand)
+    const colors = {
+      block: '#D97706',           // Amber 600
+      blockLight: '#F59E0B',      // Amber 500
+      blockDark: '#B45309',       // Amber 700
+      mortar: '#374151',          // Gray 700
+      window: '#1E3A5F',          // Dark blue
+      windowGlass: '#3B82F6',     // Blue 500
+      windowReflection: '#60A5FA', // Blue 400
+      skyTop: '#0B1120',
+      skyBottom: '#111827',
+      crane: '#4B5563',
+      craneAccent: '#F59E0B',
+      ground: '#1F2937',
+      text: '#F8FAFC',
+      textMuted: '#94A3B8',
+      messageBg: '#FFFFFF',
+      messageText: '#0B1120'
+    };
+
+    function resize() {
+      const wrapper = canvas.parentElement;
+      width = wrapper.clientWidth;
+      height = wrapper.clientHeight;
+      
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+
+      // Building dimensions - centered, responsive
+      const maxBuildingWidth = Math.min(width * 0.45, 320);
+      building.width = maxBuildingWidth;
+      building.blockSize.w = Math.max(12, building.width / 22);
+      building.blockSize.h = Math.max(6, building.blockSize.w * 0.45);
+      building.floorHeight = building.blockSize.h * 1.15;
+      building.blocksPerFloor = Math.floor(building.width / building.blockSize.w);
+      building.totalBlocks = building.targetFloors * building.blocksPerFloor * 2; // 2 layers per floor
+      
+      building.x = (width - building.width) / 2;
+      building.y = height - 80; // Ground level
+      
+      // Initialize cranes
+      if (building.cranes.length === 0) {
+        building.cranes = [
+          { x: building.x - 80, y: building.y, height: 0, targetHeight: 0, angle: 0, swingDir: 1 },
+          { x: building.x + building.width + 80, y: building.y, height: 0, targetHeight: 0, angle: 0, swingDir: -1 }
+        ];
+      }
+    }
+
+    function drawSky() {
+      // Gradient sky
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, colors.skyTop);
+      grad.addColorStop(1, colors.skyBottom);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Stars (subtle)
+      ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+      for (let i = 0; i < 30; i++) {
+        const x = (i * 127 + Math.sin(Date.now() * 0.0001 + i) * 2) % width;
+        const y = (i * 73 + Math.cos(Date.now() * 0.00008 + i) * 1.5) % (height * 0.6);
+        const size = 0.5 + (i % 3) * 0.5;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function drawGround() {
+      // Ground
+      ctx.fillStyle = colors.ground;
+      ctx.fillRect(0, building.y, width, height - building.y);
+      
+      // Ground line
+      ctx.strokeStyle = colors.mortar;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, building.y);
+      ctx.lineTo(width, building.y);
+      ctx.stroke();
+    }
+
+    function drawCranes() {
+      building.cranes.forEach(crane => {
+        const baseX = crane.x;
+        const baseY = building.y;
+        
+        // Crane height grows with building
+        const maxCraneHeight = building.y - (building.y - building.targetFloors * building.floorHeight) - 100;
+        crane.targetHeight = Math.min(maxCraneHeight, building.currentFloor * building.floorHeight + 100);
+        crane.height += (crane.targetHeight - crane.height) * 0.05;
+        
+        // Swing animation
+        crane.angle += 0.003 * crane.swingDir;
+        if (Math.abs(crane.angle) > 0.3) crane.swingDir *= -1;
+        
+        const towerTopY = baseY - crane.height;
+        const jibLength = 120;
+        const jibEndX = baseX + Math.cos(crane.angle) * jibLength * (crane.x < width/2 ? 1 : -1);
+        const jibEndY = towerTopY - Math.sin(Math.abs(crane.angle)) * 30;
+        
+        // Tower
+        ctx.strokeStyle = colors.crane;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(baseX, baseY);
+        ctx.lineTo(baseX, towerTopY);
+        ctx.stroke();
+        
+        // Tower cross braces
+        ctx.lineWidth = 1.5;
+        for (let y = baseY; y > towerTopY; y -= 25) {
+          ctx.beginPath();
+          ctx.moveTo(baseX - 8, y);
+          ctx.lineTo(baseX + 8, y - 15);
+          ctx.moveTo(baseX + 8, y);
+          ctx.lineTo(baseX - 8, y - 15);
+          ctx.stroke();
+        }
+        
+        // Jib (horizontal arm)
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(baseX, towerTopY);
+        ctx.lineTo(jibEndX, jibEndY);
+        ctx.stroke();
+        
+        // Counter-jib
+        const counterJibLength = 50;
+        const counterJibX = baseX - Math.cos(crane.angle) * counterJibLength * (crane.x < width/2 ? 1 : -1);
+        ctx.beginPath();
+        ctx.moveTo(baseX, towerTopY);
+        ctx.lineTo(counterJibX, jibEndY);
+        ctx.stroke();
+        
+        // Cable and hook
+        const hookX = jibEndX;
+        const hookY = jibEndY + Math.min(crane.height * 0.6, 200);
+        
+        ctx.strokeStyle = colors.crane;
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(jibEndX, jibEndY);
+        ctx.lineTo(hookX, hookY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // Hook
+        ctx.fillStyle = colors.craneAccent;
+        ctx.beginPath();
+        ctx.arc(hookX, hookY, 6, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Crane operator cabin
+        ctx.fillStyle = colors.crane;
+        ctx.fillRect(baseX - 12, towerTopY - 30, 24, 20);
+        ctx.fillStyle = colors.windowGlass;
+        ctx.fillRect(baseX - 10, towerTopY - 28, 8, 12);
+        ctx.fillRect(baseX + 2, towerTopY - 28, 8, 12);
+      });
+    }
+
+    function drawBuilding() {
+      const floorsBuilt = Math.floor(building.currentFloor);
+      const currentFloorProgress = building.currentFloor - floorsBuilt;
+      
+      // Draw completed floors
+      for (let f = 0; f < floorsBuilt; f++) {
+        drawFloor(f, 1.0);
+      }
+      
+      // Draw current floor being built
+      if (floorsBuilt < building.targetFloors) {
+        drawFloor(floorsBuilt, currentFloorProgress);
+      }
+      
+      // Draw windows for completed floors
+      if (phase === 'windows' || phase === 'finishing' || phase === 'message') {
+        drawWindows();
+      }
+    }
+
+    function drawFloor(floorIndex, progress) {
+      const floorY = building.y - (floorIndex + 1) * building.floorHeight;
+      const blocksInFloor = building.blocksPerFloor;
+      
+      // Two layers of blocks per floor (staggered)
+      for (let layer = 0; layer < 2; layer++) {
+        const layerProgress = Math.min(1, Math.max(0, progress * 2 - layer));
+        if (layerProgress <= 0) continue;
+        
+        const stagger = layer === 0 ? 0 : building.blockSize.w / 2;
+        const blocksToDraw = Math.ceil(blocksInFloor * layerProgress);
+        
+        for (let b = 0; b < blocksToDraw; b++) {
+          const blockX = building.x + stagger + b * building.blockSize.w;
+          const blockY = floorY + (layer === 1 ? building.blockSize.h * 0.5 : 0);
+          
+          if (blockX + building.blockSize.w > building.x + building.width) continue;
+          
+          drawBlock(blockX, blockY, building.blockSize.w, building.blockSize.h, layer);
+        }
+      }
+      
+      // Floor slab
+      ctx.fillStyle = colors.mortar;
+      ctx.fillRect(building.x - 10, floorY + building.blockSize.h * 1.5, building.width + 20, 4);
+    }
+
+    function drawBlock(x, y, w, h, layer) {
+      // Block shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+      ctx.fillRect(x + 2, y + 2, w, h);
+      
+      // Block base
+      const grad = ctx.createLinearGradient(x, y, x, y + h);
+      grad.addColorStop(0, colors.blockLight);
+      grad.addColorStop(0.5, colors.block);
+      grad.addColorStop(1, colors.blockDark);
+      ctx.fillStyle = grad;
+      ctx.fillRect(x, y, w, h);
+      
+      // Block highlight (top edge)
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.fillRect(x, y, w, 2);
+      
+      // Block side highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.fillRect(x, y, 2, h);
+      
+      // Mortar lines
+      ctx.strokeStyle = colors.mortar;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, y + h);
+      ctx.lineTo(x + w, y + h);
+      ctx.stroke();
+      
+      // Vertical mortar (staggered)
+      if (layer === 0 || x > building.x) {
+        ctx.beginPath();
+        ctx.moveTo(x + w, y);
+        ctx.lineTo(x + w, y + h);
+        ctx.stroke();
+      }
+      
+      // AAC texture - subtle air pockets
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+      const pocketCount = Math.max(2, Math.floor(w / 8));
+      for (let p = 0; p < pocketCount; p++) {
+        const px = x + 4 + (p * (w - 8) / pocketCount) + (Math.random() - 0.5) * 2;
+        const py = y + 3 + Math.random() * (h - 6);
+        const pr = 0.5 + Math.random() * 1.5;
+        ctx.beginPath();
+        ctx.arc(px, py, pr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function drawWindows() {
+      const floorsBuilt = Math.floor(building.currentFloor);
+      const windowCols = 3;
+      const windowRows = 1;
+      const windowW = building.width / (windowCols + 1) * 0.6;
+      const windowH = building.floorHeight * 0.55;
+      
+      for (let f = 0; f < floorsBuilt; f++) {
+        const floorY = building.y - (f + 1) * building.floorHeight;
+        const windowY = floorY + (building.floorHeight - windowH) / 2;
+        
+        for (let c = 0; c < windowCols; c++) {
+          const windowX = building.x + (building.width / (windowCols + 1)) * (c + 1) - windowW / 2;
+          
+          // Window frame
+          ctx.fillStyle = colors.window;
+          ctx.fillRect(windowX - 3, windowY - 3, windowW + 6, windowH + 6);
+          
+          // Window glass with reflection
+          const glassGrad = ctx.createLinearGradient(windowX, windowY, windowX, windowY + windowH);
+          glassGrad.addColorStop(0, colors.windowGlass);
+          glassGrad.addColorStop(0.5, colors.window);
+          glassGrad.addColorStop(1, colors.windowGlass);
+          ctx.fillStyle = glassGrad;
+          ctx.fillRect(windowX, windowY, windowW, windowH);
+          
+          // Reflection stripe
+          ctx.fillStyle = 'rgba(96, 165, 250, 0.3)';
+          ctx.fillRect(windowX, windowY + windowH * 0.3, windowW, windowH * 0.15);
+          
+          // Window division
+          ctx.strokeStyle = colors.window;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(windowX + windowW / 2, windowY);
+          ctx.lineTo(windowX + windowW / 2, windowY + windowH);
+          ctx.stroke();
+        }
+      }
+    }
+
+    function drawParticles() {
+      // Dust particles from construction
+      if (phase === 'building' && Math.random() < 0.3) {
+        building.particles.push({
+          x: building.x + Math.random() * building.width,
+          y: building.y - building.currentFloor * building.floorHeight,
+          vx: (Math.random() - 0.5) * 2,
+          vy: -Math.random() * 1 - 0.5,
+          life: 1,
+          size: 1 + Math.random() * 2,
+          color: `rgba(245, 158, 11, ${0.3 + Math.random() * 0.4})`
+        });
+      }
+      
+      building.particles = building.particles.filter(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.02; // gravity
+        p.life -= 0.015;
+        
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        
+        return p.life > 0;
+      });
+    }
+
+    function updateStats() {
+      if (floorsEl) floorsEl.textContent = Math.floor(building.currentFloor);
+      if (blocksEl) blocksEl.textContent = Math.floor(building.blocksPlaced).toLocaleString();
+      if (heightEl) heightEl.textContent = Math.floor(building.currentFloor * 3.2) + 'm';
+    }
+
+    function animate(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      
+      // Clear
+      ctx.clearRect(0, 0, width, height);
+      
+      drawSky();
+      drawGround();
+      drawCranes();
+      drawBuilding();
+      drawParticles();
+      
+      // Update building progress
+      if (phase === 'building') {
+        const buildSpeed = 0.008; // floors per ms
+        building.currentFloor = Math.min(building.targetFloors, elapsed * buildSpeed);
+        building.blocksPlaced = building.currentFloor * building.blocksPerFloor * 2;
+        
+        if (building.currentFloor >= building.targetFloors) {
+          building.currentFloor = building.targetFloors;
+          building.blocksPlaced = building.totalBlocks;
+          phase = 'windows';
+          phaseStartTime = timestamp;
+        }
+      } else if (phase === 'windows') {
+        // Windows appear with a delay
+        const windowDelay = 1500;
+        if (timestamp - phaseStartTime > windowDelay) {
+          phase = 'finishing';
+          phaseStartTime = timestamp;
+        }
+      } else if (phase === 'finishing') {
+        // Finishing touches - brief pause
+        if (timestamp - phaseStartTime > 1000) {
+          phase = 'message';
+          phaseStartTime = timestamp;
+        }
+      } else if (phase === 'message') {
+        // Fade in final message
+        const fadeDuration = 1500;
+        const progress = Math.min(1, (timestamp - phaseStartTime) / fadeDuration);
+        const easedProgress = progress < 0.5 
+          ? 2 * progress * progress 
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        
+        if (finalMessageEl) {
+          finalMessageEl.style.opacity = easedProgress;
+          finalMessageEl.style.transform = `translateY(${20 * (1 - easedProgress)}px)`;
+        }
+        
+        // Fade out stats
+        if (statsEl) {
+          statsEl.style.opacity = 1 - easedProgress;
+        }
+      }
+      
+      updateStats();
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function init() {
+      resize();
+      window.addEventListener('resize', resize);
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function destroy() {
+      if (animationId) cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
+    }
+
+    // Handle reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Skip animation, show final state
+      if (canvas) canvas.style.display = 'none';
+      if (finalMessageEl) {
+        finalMessageEl.style.opacity = '1';
+        finalMessageEl.style.transform = 'translateY(0)';
+      }
+      if (statsEl) statsEl.style.display = 'none';
+      return;
+    }
+
+    init();
+    return { destroy };
+  })();
 });

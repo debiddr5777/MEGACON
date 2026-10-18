@@ -93,10 +93,34 @@
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
   
-  <!-- Hero Section -->
+  <!-- Hero Section with Canvas Animation -->
   <section class="hero-section glass-section" id="hero">
     <div class="hero-bg-overlay"></div>
-    <video class="hero-bg-logo hero-bg-left" src="./assets/logo-animated.mp4" autoplay muted loop playsinline></video>
+    
+    <!-- Canvas Animation Container -->
+    <div class="hero-canvas-wrapper">
+      <canvas id="construction-canvas" aria-label="MEGACON AAC Blocks constructing a skyscraper animation"></canvas>
+      <div class="canvas-overlay">
+        <div class="construction-stats" id="construction-stats">
+          <div class="stat-item">
+            <span class="stat-value" id="stat-floors">0</span>
+            <span class="stat-label">Floors Built</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-blocks">0</span>
+            <span class="stat-label">Blocks Placed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="stat-height">0m</span>
+            <span class="stat-label">Height</span>
+          </div>
+        </div>
+        <div class="final-message" id="final-message">
+          <span class="message-text">building skyscrapers by MEGACON AAC strength</span>
+        </div>
+      </div>
+    </div>
+    
     <div class="container hero-container">
       <div class="hero-content">
         <span class="hero-badge">100% Pure Fly Ash AAC Blocks</span>

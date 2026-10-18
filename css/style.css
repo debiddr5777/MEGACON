@@ -556,6 +556,206 @@ section {
   transform: translateY(-50%) rotate(-8deg) scale(2.025);
 }
 
+/* ==========================================================================
+   HERO CANVAS ANIMATION
+   ========================================================================== */
+
+.hero-canvas-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#construction-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  pointer-events: none;
+}
+
+.construction-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(11, 17, 32, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  min-width: 120px;
+  transition: var(--transition-normal);
+}
+
+.stat-item:hover {
+  border-color: var(--megacon-primary);
+  box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15);
+}
+
+.stat-value {
+  font: var(--large-title-emphasized);
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--megacon-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.stat-label {
+  font: var(--caption);
+  color: var(--megacon-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.final-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.final-message.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-text {
+  background: var(--megacon-bg);
+  color: var(--megacon-primary);
+  font: var(--title-1-emphasized);
+  font-size: clamp(18px, 2.5vw, 28px);
+  padding: 18px 36px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--megacon-primary);
+  box-shadow: 0 12px 48px rgba(245, 158, 11, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  white-space: nowrap;
+  animation: messagePulse 3s ease-in-out infinite;
+}
+
+@keyframes messagePulse {
+  0%, 100% { box-shadow: 0 12px 48px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+  50% { box-shadow: 0 16px 64px rgba(245, 158, 11, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15); }
+}
+
+/* Light theme adjustments for canvas overlay */
+html.light-theme .stat-item {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(217, 119, 6, 0.2);
+}
+
+html.light-theme .stat-item:hover {
+  border-color: var(--megacon-primary);
+  box-shadow: 0 8px 32px rgba(217, 119, 6, 0.15);
+}
+
+html.light-theme .message-text {
+  background: var(--megacon-bg-elevated);
+  color: var(--megacon-primary);
+  border-color: var(--megacon-primary);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .hero-canvas-wrapper {
+    height: 60%;
+  }
+  
+  .construction-stats {
+    gap: 16px;
+  }
+  
+  .stat-item {
+    padding: 12px 16px;
+    min-width: 100px;
+  }
+  
+  .stat-value {
+    font-size: clamp(20px, 3vw, 28px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-canvas-wrapper {
+    height: 50%;
+  }
+  
+  .canvas-overlay {
+    padding: 20px;
+  }
+  
+  .construction-stats {
+    gap: 12px;
+    margin-top: 10px;
+  }
+  
+  .stat-item {
+    padding: 10px 14px;
+    min-width: 85px;
+  }
+  
+  .stat-value {
+    font-size: 18px;
+  }
+  
+  .stat-label {
+    font-size: 9px;
+  }
+  
+  .message-text {
+    font-size: clamp(14px, 3vw, 20px);
+    padding: 12px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .construction-stats {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .stat-item {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    min-width: auto;
+  }
+}
+
 .hero-container {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
